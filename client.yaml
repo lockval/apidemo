@@ -1,0 +1,84 @@
+
+- name: read&write kv
+  comment: this is a read&write kv example, Count increments by 1
+  KeySubList:
+    - name: mBase
+      comment: Count is a counter
+  Call: 
+      name: testBaseCount
+      comment: 
+
+
+- name: requ&resp
+  comment: this is a requ&resp example
+  KeySubList: []
+  Call: 
+      name: testRequResp
+      comment: 
+      params:
+        param1: string
+        param2: number
+        param3: boolean
+
+- name: list queue mode
+  comment: In order, push data to the end of the list, and excess data will shift out from the front
+  KeySubList:
+    - name: mList
+      comment: list mode
+  Call: 
+      name: testListQueue
+      comment: 
+      params:
+        first: string
+        second: string
+
+
+- name: list stack mode
+  comment: First pop up the n pieces behind the old data, and then push data to the end of the list
+  KeySubList:
+    - name: mList
+      comment: list mode
+  Call: 
+      name: testListStack
+      comment: 
+      params:
+        n: number
+
+- name: clear data
+  comment:  Clear data before doing anything
+  KeySubList:
+    - name: mList
+      comment: list mode
+  Call: 
+      name: testClearData
+      comment: 
+
+- name: get all data
+  comment:  There are two ways to get all the data
+  KeySubList: []
+  Call: 
+      name: testGetAll
+      comment: 
+
+- name: put link
+  comment:  Associate other KeySub when putting data
+  KeySubList:
+    - name: mList
+      comment: list mode
+    - name: mListSlave
+      comment: list mode
+  Call: 
+      name: testPutLink
+      comment: 
+      params:
+        first: string
+        second: string
+
+- name: throw a user error
+  comment: like read&write kv, but execution is interrupted.
+  KeySubList:
+    - name: mBase
+      comment: Count is a counter
+  Call: 
+      name: testThrow
+      comment: 

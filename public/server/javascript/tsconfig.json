@@ -1,0 +1,16 @@
+{
+    "include": [
+        "src/**/*"
+    ],
+    "compilerOptions": {
+        "module": "amd",
+        "outFile": "../../server.js",
+        "target": "es5",
+        "newLine": "lf",
+        "strict": true,
+        "noImplicitAny": false,
+        "lib": [
+            "ES2015"
+        ]
+    }
+}

@@ -1,0 +1,32 @@
+@import './base.css';
+
+#app {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 2rem;
+
+  font-weight: normal;
+}
+
+a,
+.red {
+  text-decoration: none;
+  color: rgb(255, 0, 0);
+  transition: 0.4s;
+}
+.green {
+  text-decoration: none;
+  color: rgb(0, 255, 0);
+  transition: 0.4s;
+}
+.blue {
+  text-decoration: none;
+  color: rgb(0, 0, 255);
+  transition: 0.4s;
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: hsla(160, 100%, 37%, 0.2);
+  }
+}
