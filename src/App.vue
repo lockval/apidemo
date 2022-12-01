@@ -144,18 +144,29 @@ async function Call(name: string, types: any, demoname: string) {
     <p>
       locKVal is a distributed key-value service engine that can run scripts.
     </p>
+    <br />
+    <p>On the server side, you can write in the following languages:</p>
+    <p class="red">Javascript/TypeScript, Go, Lua, Starlark(like Python)</p>
+    <p>
+      <span>We now provide </span>
+      <span class="red">TypeScript libraries for clients</span>,
+    </p>
+    <p>
+      and will gradually provide support for more environments in the future
+    </p>
+    <br />
     <p>You can learn how to build your app with locKVal here.</p>
     <p>
       This site(<a href="https://github.com/lockval/apidemo" target="_blank"
         >source</a
       >) is built using locKVal itself
     </p>
-    <p class="red">This site is still under construction</p>
+    <p>This site is still under construction</p>
     <br /><br /><br />
 
     x.Name = <input @input="input" v-model="$store.state.config.guestname" /> //
     refresh takes effect<br />
-    <button @click="clientCode()">show/hide client code</button><br />
+    <button @click="clientCode()">show / hide client code</button><br />
     <highlightjs language="typescript" :code="$store.state.config.clientCode" />
 
     console.log(this.UID);<br />

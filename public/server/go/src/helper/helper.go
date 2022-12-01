@@ -1,6 +1,10 @@
 package helper
 
-import "reflect"
+import (
+	"reflect"
+
+	"github.com/lockval/go2plugin"
+)
 
 func Any2type[T any](v any) (ret T) {
 	if v != nil {
@@ -58,4 +62,28 @@ func Any2Func[T any](v any, funcName string) (ret T) {
 
 func Any2ANY[T any](v any) ANY[T] {
 	return ANY[T]{V: v}
+}
+
+func GetResp(input *go2plugin.Input, IDKey, KeySub, SubVal string) string {
+	k, ok := input.GetResp.IDKey[IDKey]
+	if !ok {
+		return ""
+	}
+	if k.KeySub == nil {
+		return ""
+	}
+
+	s, ok := k.KeySub[KeySub]
+	if !ok {
+		return ""
+	}
+	if s.SubVal == nil {
+		return ""
+	}
+
+	v, ok := s.SubVal[SubVal]
+	if !ok {
+		return ""
+	}
+	return v
 }

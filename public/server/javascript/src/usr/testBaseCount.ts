@@ -13,5 +13,5 @@ export function main(input: DBOperate<any>) {
   input.PutSubVal(input.UID, "mBase", "Count", c);
   input.PutAndUnlock();
 
-  return {};
+  return { Hello: "JS" };
 }

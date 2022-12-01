@@ -9,7 +9,7 @@ to generate the corresponding API demo page
 ### Quick start
 
 ```sh
-npm run buildAndPreview
+npm run buildBothAndPreview
 ```
 
 ## prepare some tools
@@ -82,5 +82,5 @@ npm run serverStarBuildAndUpload
 - public/server/lua
 - public/server/starlark
 - public/server/javascript
-- public/client
+- public/client (Mainly in the generated player.ts file)
 

@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "scripts": {
     "build": "run-p serverJsBuildAndUpload clientBuild",
-    "buildAndPreview": "run-s lint build vitePreview",
+    "buildBothAndPreview": "run-s lint build vitePreview",
     "buildClientAndPreview": "run-s lint clientBuild vitePreview",
 
+    "dev": "vite",
     "viteBuild": "vite build",
     "vitePreview": "vite preview",
     "type-check": "vue-tsc --noEmit",

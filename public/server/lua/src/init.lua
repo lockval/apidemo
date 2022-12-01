@@ -5,24 +5,12 @@ return require("umd").define({
     function exports.main()
         local retval = {}
         retval["player"]={
-            "Base",
-            "Timeout",
-            "Atomic",
-            "ArriveCount",
-            "TapCountStruct",
-            "TapCountMap",
-            "TapCountRecord",
-            "TestM1",
-            "TestM2",
-
-            "base",
-            "watchmap"
+            "mBase",
+            "mList",
+            "mListSlave",
         }
 
-        retval["map"]={
-            "uid2dmid",
-            "color"
-        }
+
 
         return retval
     end
