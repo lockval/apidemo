@@ -6,9 +6,18 @@ Edit client.yaml and public/server/...
 
 to generate the corresponding API demo page
 
+### Quick start
+
+```sh
+npm run buildAndPreview
+```
+
 ## prepare some tools
 - Node.js
 - curl
+- Go (1.19)
+- Lua (>=5.1)
+- [starc2one](https://github.com/vanishs/starc2one)
 
 ### Project Setup
 
@@ -27,17 +36,43 @@ export lockvalGwAddrs=http://127.0.0.1:59501,http://127.0.0.1:59502
 
 ### Download and start your services
 
-- [Linux amd64](https://downloads.lockval.com/v0.0.4.amd64.linux.zip)
-- [Linux arm64](https://downloads.lockval.com/v0.0.4.arm64.linux.zip)
-- [macOS amd64](https://downloads.lockval.com/v0.0.4.amd64.darwin.zip)
-- [macOS arm64](https://downloads.lockval.com/v0.0.4.arm64.darwin.zip)
-- [Windows amd64](https://downloads.lockval.com/v0.0.4.amd64.windows.zip)
-- [Windows arm64](https://downloads.lockval.com/v0.0.4.arm64.windows.zip)
+- [Linux amd64](https://downloads.lockval.com/v0.0.7.amd64.linux.zip)
+- [Linux arm64](https://downloads.lockval.com/v0.0.7.arm64.linux.zip)
+- [macOS amd64](https://downloads.lockval.com/v0.0.7.amd64.darwin.zip)
+- [macOS arm64](https://downloads.lockval.com/v0.0.7.arm64.darwin.zip)
+- [Windows amd64](https://downloads.lockval.com/v0.0.7.amd64.windows.zip)
+- [Windows arm64](https://downloads.lockval.com/v0.0.7.arm64.windows.zip)
 
 
-### Build Client&Server Script to services And Preview
+
+
+### Build Client And Preview
 
 ```sh
-npm run buildAndPreview
+npm run buildClientAndPreview
+```
+
+### Build Server(JS) And Upload
+
+```sh
+npm run serverJsBuildAndUpload
+```
+
+### Build Server(Go) And Upload (Only run on macOS and Linux)
+
+```sh
+./serverGoBuildAndUpload.sh
+```
+
+### Build Server(Lua) And Upload
+
+```sh
+npm run serverLuaBuildAndUpload
+```
+
+### Build Server(Starlark) And Upload ([Starlark is a dialect of Python](https://github.com/bazelbuild/starlark))
+
+```sh
+npm run serverStarBuildAndUpload
 ```
 

@@ -1,0 +1,61 @@
+package helper
+
+import "reflect"
+
+func Any2type[T any](v any) (ret T) {
+	if v != nil {
+		ret, _ = v.(T)
+	}
+	return
+}
+
+type ANY[T any] struct {
+	V any
+}
+
+func (v ANY[T]) Map(k string) ANY[T] {
+	if v.V != nil {
+		m, _ := v.V.(map[string]any)
+		if m != nil {
+			return ANY[T]{V: m[k]}
+		}
+		return v
+	}
+	return v
+}
+
+func (v ANY[T]) Slice(idx int) ANY[T] {
+	if v.V != nil {
+		s, _ := v.V.([]any)
+		if s != nil {
+			return ANY[T]{V: s[idx]}
+		}
+		return v
+	}
+	return v
+}
+
+func (v ANY[T]) Value() (ret T) {
+	if v.V != nil {
+		ret, _ = v.V.(T)
+	}
+	return
+}
+
+func Any2Func[T any](v any, funcName string) (ret T) {
+	if v != nil {
+		sr := reflect.ValueOf(v)
+		if sr.Kind() == reflect.Struct {
+			fr := sr.FieldByName(funcName)
+			if !fr.IsZero() {
+				return fr.Interface().(T)
+			}
+		}
+
+	}
+	return
+}
+
+func Any2ANY[T any](v any) ANY[T] {
+	return ANY[T]{V: v}
+}

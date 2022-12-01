@@ -33,4 +33,4 @@ public/player.ts
 src/assets/client.json
 
 # gen by server/
-public/server.js
+public/server/go/go.sum

@@ -1,5 +1,9 @@
 export function main() {
   return {
-    "player:": ["mBase", "mList", "mListSlave"],
+    "player:": [
+      "mBase",
+      "mList",
+      "mListSlave",
+    ],
   };
 }

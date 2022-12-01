@@ -4,7 +4,7 @@
     ],
     "compilerOptions": {
         "module": "amd",
-        "outFile": "../../server.js",
+        "outFile": "../../../dist/main.js",
         "target": "es5",
         "newLine": "lf",
         "strict": true,

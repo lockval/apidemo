@@ -1,4 +1,4 @@
-import { Dict, DBOperate } from "../lockvalserver";
+import { Dict, DBOperate } from "../libs/lockvalserver";
 
 export function main(input: DBOperate<any>) {
   input.GetSubVal(input.UID, "mBase", "Count");

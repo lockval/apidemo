@@ -2,21 +2,33 @@
   "name": "apidemo.lockval",
   "version": "1.0.0",
   "scripts": {
-    "buildAndPreview": "run-s lint build preview",
-    "build": "run-s serverGen serverUpload clientGen check-build",
-    "check-build": "run-p type-check build-only",
-    "build-only": "vite build",
-    "preview": "vite preview",
+    "build": "run-p serverJsBuildAndUpload clientBuild",
+    "buildAndPreview": "run-s lint build vitePreview",
+    "buildClientAndPreview": "run-s clientBuild vitePreview",
 
+    "viteBuild": "vite build",
+    "vitePreview": "vite preview",
     "type-check": "vue-tsc --noEmit",
     "lint": "eslint . --ext .vue,.jsx,.cjs,.mjs,.js,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
 
+    "clientCheckBuild": "run-p type-check viteBuild",
     "clientYAML2JSON": "yaml2json client.yaml > ./src/assets/client.json",
     "clientMakePlayer": "./makeplayer.js $lockvalGwAddrs",
     "clientGen": "run-s clientYAML2JSON clientMakePlayer",
-    "serverUpload": "curl --insecure -X POST --data-binary @public/server.js `./getUpdatefileURL.js $lockvalUpdatefileDomain $lockvalUpdatefilePassword`",
-    "serverGen": "tsc --project ./public/server/javascript/tsconfig.json"
+    "clientBuild": "run-s clientGen clientCheckBuild",
 
+
+    "serverUploadJS": "curl --insecure -X POST --data-binary @dist/main.js `./getUpdatefileURL.js $lockvalUpdatefileDomain $lockvalUpdatefilePassword`",
+    "serverGenJS": "tsc --project ./public/server/javascript/tsconfig.json",
+    "serverJsBuildAndUpload": "run-s serverGenJS serverUploadJS",
+
+    "serverUploadStar": "curl --insecure -X POST --data-binary @dist/main.sbin `./getUpdatefileURL.js $lockvalUpdatefileDomain $lockvalUpdatefilePassword`",
+    "serverGenStar": "starc2one -file public/server/starlark/src -output dist/main.sbin -suffix .star",
+    "serverStarBuildAndUpload": "run-s serverGenStar serverUploadStar",
+
+    "serverUploadLua": "curl --insecure -X POST --data-binary @dist/main.lua `./getUpdatefileURL.js $lockvalUpdatefileDomain $lockvalUpdatefilePassword`",
+    "serverGenLua": "cd public/server/lua && ./build.js",
+    "serverLuaBuildAndUpload": "run-s serverGenLua serverUploadLua"
   },
   "dependencies": {
     "@highlightjs/vue-plugin": "^2.1.0",
