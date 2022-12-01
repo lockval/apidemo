@@ -8,7 +8,9 @@ function walkSync(currentDirPath, ext, callback) {
     let filePath = path.join(currentDirPath, dirent.name);
     if (dirent.isFile()) {
       if (filePath.endsWith(ext)) {
-        callback(filePath.substring(4, filePath.length - ext.length));
+        let luaDirSys = filePath.substring(4, filePath.length - ext.length)
+        let luaDirUnix = luaDirSys.replace("\\","/")
+        callback(luaDirUnix);
       }
 
     } else if (dirent.isDirectory()) {
@@ -32,11 +34,11 @@ const { exec } = require("child_process");
 exec(cmd, (error, stdout, stderr) => {
   if (error) {
     console.log(`error: ${error.message}`);
-    return;
+    return 1;
   }
   if (stderr) {
     console.log(`stderr: ${stderr}`);
-    return;
+    // return 2;
   }
   console.log(`stdout: ${stdout}`);
 });

@@ -13,21 +13,21 @@
 
     "clientCheckBuild": "run-p type-check viteBuild",
     "clientYAML2JSON": "yaml2json client.yaml > ./src/assets/client.json",
-    "clientMakePlayer": "./makeplayer.js $lockvalGwAddrs",
+    "clientMakePlayer": "node ./makeplayer.js",
     "clientGen": "run-s clientYAML2JSON clientMakePlayer",
     "clientBuild": "run-s clientGen clientCheckBuild",
 
 
-    "serverUploadJS": "curl --insecure -X POST --data-binary @dist/main.js `./getUpdatefileURL.js $lockvalUpdatefileDomain $lockvalUpdatefilePassword`",
+    "serverUploadJS": "node ./getUpdatefileURL.js dist/main.js",
     "serverGenJS": "tsc --project ./public/server/javascript/tsconfig.json",
     "serverJsBuildAndUpload": "run-s serverGenJS serverUploadJS",
 
-    "serverUploadStar": "curl --insecure -X POST --data-binary @dist/main.sbin `./getUpdatefileURL.js $lockvalUpdatefileDomain $lockvalUpdatefilePassword`",
+    "serverUploadStar": "node ./getUpdatefileURL.js dist/main.sbin",
     "serverGenStar": "starc2one -file public/server/starlark/src -output dist/main.sbin -suffix .star",
     "serverStarBuildAndUpload": "run-s serverGenStar serverUploadStar",
 
-    "serverUploadLua": "curl --insecure -X POST --data-binary @dist/main.lua `./getUpdatefileURL.js $lockvalUpdatefileDomain $lockvalUpdatefilePassword`",
-    "serverGenLua": "cd public/server/lua && ./build.js",
+    "serverUploadLua": "node ./getUpdatefileURL.js dist/main.lua",
+    "serverGenLua": "cd public/server/lua && node ./build.js",
     "serverLuaBuildAndUpload": "run-s serverGenLua serverUploadLua"
   },
   "dependencies": {

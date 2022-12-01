@@ -85,8 +85,8 @@ let repl3 = Mustache.render(
 );
 
 let repl4="http://127.0.0.1:59501,http://127.0.0.1:59502";
-if(process.argv[2]){
-  repl4=process.argv[2];
+if(process.env.lockvalGwAddrs){
+  repl4=process.env.lockvalGwAddrs;
 }
 
 
