@@ -18,15 +18,15 @@
     "clientBuild": "run-s clientGen clientCheckBuild",
 
 
-    "serverUploadJS": "node ./getUpdatefileURL.js dist/main.js",
+    "serverUploadJS": "node ./updatefile.js dist/main.js",
     "serverGenJS": "tsc --project ./public/server/javascript/tsconfig.json",
     "serverJsBuildAndUpload": "run-s serverGenJS serverUploadJS",
 
-    "serverUploadStar": "node ./getUpdatefileURL.js dist/main.sbin",
+    "serverUploadStar": "node ./updatefile.js dist/main.sbin",
     "serverGenStar": "starc2one -file public/server/starlark/src -output dist/main.sbin -suffix .star",
     "serverStarBuildAndUpload": "run-s serverGenStar serverUploadStar",
 
-    "serverUploadLua": "node ./getUpdatefileURL.js dist/main.lua",
+    "serverUploadLua": "node ./updatefile.js dist/main.lua",
     "serverGenLua": "cd public/server/lua && node ./build.js",
     "serverLuaBuildAndUpload": "run-s serverGenLua serverUploadLua"
   },
