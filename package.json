@@ -4,12 +4,12 @@
   "scripts": {
     "build": "run-p serverJsBuildAndUpload clientBuild",
     "buildAndPreview": "run-s lint build vitePreview",
-    "buildClientAndPreview": "run-s clientBuild vitePreview",
+    "buildClientAndPreview": "run-s lint clientBuild vitePreview",
 
     "viteBuild": "vite build",
     "vitePreview": "vite preview",
     "type-check": "vue-tsc --noEmit",
-    "lint": "eslint . --ext .vue,.jsx,.cjs,.mjs,.js,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "lint": "eslint . --ext .vue,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
 
     "clientCheckBuild": "run-p type-check viteBuild",
     "clientYAML2JSON": "yaml2json client.yaml > ./src/assets/client.json",

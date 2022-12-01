@@ -31,12 +31,6 @@ onMounted(() => {
   }
   store.commit("setConfig", { k: "guestname", v: guestname });
 
-  for (let demo of clientobj) {
-    fetch("./server/javascript/src/usr/" + demo.Call.name + ".ts")
-      .then((resp) => resp.text())
-      .then((data) => store.commit("setCode", { k: demo.name, v: data }));
-  }
-
   player.userData.eventTarget.addEventListener("OnLogin", () => {
     store.commit("setConfig", { k: "UID", v: player.UID });
     console.log("OnLogin");
@@ -85,12 +79,31 @@ function clientCode() {
     store.commit("setConfig", { k: "clientCode", v: "" });
   }
 }
-async function code(callname: string) {
-  window.open("./server/javascript/src/usr/" + callname + ".ts");
+
+// window.open("./server/javascript/src/usr/" + callname + ".ts");
+async function jscode(callname: string, demoname: string) {
+  fetch("./server/javascript/src/usr/" + callname + ".ts")
+    .then((resp) => resp.text())
+    .then((data) => store.commit("setCode", { k: demoname, v: data }));
 }
+async function gocode(callname: string, demoname: string) {
+  fetch("./server/go/src/usr/" + callname + ".go")
+    .then((resp) => resp.text())
+    .then((data) => store.commit("setCode", { k: demoname, v: data }));
+}
+async function luacode(callname: string, demoname: string) {
+  fetch("./server/lua/src/usr/" + callname + ".lua")
+    .then((resp) => resp.text())
+    .then((data) => store.commit("setCode", { k: demoname, v: data }));
+}
+async function starcode(callname: string, demoname: string) {
+  fetch("./server/starlark/src/usr/" + callname + ".star")
+    .then((resp) => resp.text())
+    .then((data) => store.commit("setCode", { k: demoname, v: data }));
+}
+
 async function Call(name: string, types: any, demoname: string) {
-  store.commit("setIsCode", { k: demoname, v: false });
-  store.commit("setResp", { k: demoname, v: "" });
+  store.commit("setCode", { k: demoname, v: "" });
 
   if (types === undefined) {
     types = {};
@@ -108,7 +121,7 @@ async function Call(name: string, types: any, demoname: string) {
   // console.log(params);
 
   let resp = await player.Call(name, params);
-  store.commit("setResp", { k: demoname, v: JSON.stringify(resp, null, 4) });
+  store.commit("setCode", { k: demoname, v: JSON.stringify(resp, null, 4) });
 }
 </script>
 
@@ -155,9 +168,10 @@ async function Call(name: string, types: any, demoname: string) {
       {{ demo.comment }}
 
       <highlightjs autodetect :code="$store.state.getHL(demo.name)" />
-      <button @click="code(demo.Call.name)">server code</button> •
-      <input type="checkbox" v-model="$store.state.isCode[demo.name]" />
-      •
+      <button @click="jscode(demo.Call.name, demo.name)">JS</button> •
+      <button @click="gocode(demo.Call.name, demo.name)">Go</button> •
+      <button @click="luacode(demo.Call.name, demo.name)">Lua</button> •
+      <button @click="starcode(demo.Call.name, demo.name)">Starlark</button> ---
       <button @click="Call(demo.Call.name, demo.Call.params, demo.name)">
         Call "{{ demo.Call.name }}"
       </button>
