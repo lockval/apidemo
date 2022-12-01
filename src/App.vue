@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import clientobj from "./assets/client.json";
-import { Player } from "../public/player";
+import { Player } from "../public/client/player";
 
 import { store, type Dict } from "./g/data";
 import { onMounted } from "vue";
@@ -72,7 +72,7 @@ function toBoolean(v: any): boolean {
 }
 function clientCode() {
   if (!store.state.config.clientCode) {
-    fetch("./player.ts")
+    fetch("./client/player.ts")
       .then((resp) => resp.text())
       .then((data) => store.commit("setConfig", { k: "clientCode", v: data }));
   } else {

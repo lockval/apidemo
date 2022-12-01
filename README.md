@@ -76,3 +76,11 @@ npm run serverLuaBuildAndUpload
 npm run serverStarBuildAndUpload
 ```
 
+### Source Code Paths
+
+- public/server/go
+- public/server/lua
+- public/server/starlark
+- public/server/javascript
+- public/client
+

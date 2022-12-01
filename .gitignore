@@ -29,7 +29,7 @@ coverage
 
 # gen by client.yaml
 
-public/player.ts
+public/client/player.ts
 src/assets/client.json
 
 # gen by server/

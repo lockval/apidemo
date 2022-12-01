@@ -4,7 +4,7 @@ let fs = require("fs");
 var Mustache = require("mustache");
 
 let demoList = JSON.parse(fs.readFileSync("./src/assets/client.json", "utf8"));
-let output = fs.readFileSync("./public/player.temp.ts", "utf8");
+let output = fs.readFileSync("./public/client/player.temp.ts", "utf8");
 
 let repl1tmp = "  //repl1";
 let repl2tmp = "  //repl2";
@@ -95,5 +95,5 @@ output = output.replace(repl2tmp, repl2);
 output = output.replace(repl3tmp, repl3);
 output = output.replace(repl4tmp, repl4);
 
-fs.writeFileSync("./public/player.ts", output, "utf8");
+fs.writeFileSync("./public/client/player.ts", output, "utf8");
 // console.log(repl1);

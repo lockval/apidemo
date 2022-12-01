@@ -1,6 +1,6 @@
 {
   "extends": "@vue/tsconfig/tsconfig.web.json",
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "public/player.temp.ts"],
+  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "public/client/player.temp.ts"],
   "compilerOptions": {
     "lib": [
       "es2020",
