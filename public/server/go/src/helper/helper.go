@@ -6,6 +6,10 @@ import (
 	"github.com/lockval/go2plugin"
 )
 
+var (
+	RespEmpty = map[string]any{}
+)
+
 func Any2type[T any](v any) (ret T) {
 	if v != nil {
 		ret, _ = v.(T)
