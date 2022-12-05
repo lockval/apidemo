@@ -36,12 +36,12 @@ export lockvalGwAddrs=http://127.0.0.1:59501,http://127.0.0.1:59502
 
 ### Download and start your services
 
-- [Linux amd64](https://downloads.lockval.com/v0.0.7.amd64.linux.zip)
-- [Linux arm64](https://downloads.lockval.com/v0.0.7.arm64.linux.zip)
-- [macOS amd64](https://downloads.lockval.com/v0.0.7.amd64.darwin.zip)
-- [macOS arm64](https://downloads.lockval.com/v0.0.7.arm64.darwin.zip)
-- [Windows amd64](https://downloads.lockval.com/v0.0.7.amd64.windows.zip)
-- [Windows arm64](https://downloads.lockval.com/v0.0.7.arm64.windows.zip)
+- [Linux amd64](https://downloads.lockval.com/v0.0.8.amd64.linux.zip)
+- [Linux arm64](https://downloads.lockval.com/v0.0.8.arm64.linux.zip)
+- [macOS amd64](https://downloads.lockval.com/v0.0.8.amd64.darwin.zip)
+- [macOS arm64](https://downloads.lockval.com/v0.0.8.arm64.darwin.zip)
+- [Windows amd64](https://downloads.lockval.com/v0.0.8.amd64.windows.zip)
+- [Windows arm64](https://downloads.lockval.com/v0.0.8.arm64.windows.zip)
 
 
 
@@ -84,3 +84,6 @@ npm run serverStarBuildAndUpload
 - public/server/javascript
 - public/client (Mainly in the generated player.ts file)
 
+### Customize your own Authentication server
+
+You can learn how to develop a login(Service AuthN) and a guest(3rd Platform AuthN) [here](https://github.com/lockval/authn)
