@@ -5,9 +5,9 @@ def main(input):
   input.PutSubVal(
     input.UID,
     "mList",
-    "1", input.Requ["first"],
-    "2", input.Requ["second"],
-  ).List(5) # limit 5
+    "1", "A",
+    "2", "B",
+  ).List(-int(input.Requ["n"])) # Note that here are negative numbers
   input.PutAndUnlock()
 
   return {}
