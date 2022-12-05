@@ -1,16 +1,16 @@
-import { Dict, DBOperate } from "../libs/lockvalserver";
+import { Dict, DBOperate } from "../libs/lockvalserver"
 
 export function main(input: DBOperate<any>) {
-  input.GetSubVal(input.UID, "mList", ""); //get nothing
-  input.GetAndLock();
+  input.GetSubVal(input.UID, "mList", "") //get nothing
+  input.GetAndLock()
 
   input.PutSubVal(
     input.UID,
     "mList",
     "1", "A",
     "2", "B",
-  ).List(-input.Requ.n); //Note that here are negative numbers
-  input.PutAndUnlock();
+  ).List(-input.Requ.n) //Note that here are negative numbers
+  input.PutAndUnlock()
 
-  return {};
+  return {}
 }

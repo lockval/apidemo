@@ -1,4 +1,4 @@
-import { Dict, DBOperate } from "../libs/lockvalserver";
+import { Dict, DBOperate } from "../libs/lockvalserver"
 
 export function main(input: DBOperate<any>) {
   const resp = {
@@ -6,6 +6,6 @@ export function main(input: DBOperate<any>) {
     resp2: input.Requ.param2,
     resp3: input.Requ.param3,
     scriptType:"JavaScript",
-  };
-  return resp;
+  }
+  return resp
 }

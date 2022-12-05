@@ -5,5 +5,5 @@ export function main() {
       "mList",
       "mListSlave",
     ],
-  };
+  }
 }

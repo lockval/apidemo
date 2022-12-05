@@ -1,17 +1,17 @@
-import { Dict, DBOperate } from "../libs/lockvalserver";
+import { Dict, DBOperate } from "../libs/lockvalserver"
 
 export function main(input: DBOperate<any>) {
-  input.GetSubVal(input.UID, "mBase", "Count");
-  input.GetAndLock();
+  input.GetSubVal(input.UID, "mBase", "Count")
+  input.GetAndLock()
 
-  let c = input.GetResp.IDKey[input.UID]?.KeySub["mBase"]?.SubVal["Count"];
+  let c = input.GetResp.IDKey[input.UID]?.KeySub["mBase"]?.SubVal["Count"]
 
-  let ci = Number(c);
-  ci++;
-  c = ci.toString();
+  let ci = Number(c)
+  ci++
+  c = ci.toString()
 
-  input.PutSubVal(input.UID, "mBase", "Count", c);
-  input.PutAndUnlock();
+  input.PutSubVal(input.UID, "mBase", "Count", c)
+  input.PutAndUnlock()
 
-  return { Hello: "JS" };
+  return { Hello: "JS" }
 }

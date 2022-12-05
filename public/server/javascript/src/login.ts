@@ -1,4 +1,4 @@
-import { Dict, DBOperate } from "./libs/lockvalserver";
+import { Dict, DBOperate } from "./libs/lockvalserver"
 
 export function main(input: DBOperate<null>) {
     
