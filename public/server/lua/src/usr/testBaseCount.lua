@@ -1,14 +1,14 @@
 return require("umd").define({
     "exports",
-    "other/utils",
-}, function(exports, utils)
+    "other/helper",
+}, function(exports, helper)
 
     function exports.main(input)
 
         input.GetSubVal(input.UID, "mBase", "Count")
         input.GetAndLock()
 
-        local c = utils.GetResp(input, input.UID, "mBase", "Count")
+        local c = helper.GetResp(input, input.UID, "mBase", "Count")
         if c == "" then
             c = "0"
         end

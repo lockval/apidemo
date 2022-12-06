@@ -73,15 +73,9 @@ func GetResp(input *go2plugin.Input, IDKey, KeySub, SubVal string) string {
 	if !ok {
 		return ""
 	}
-	if k.KeySub == nil {
-		return ""
-	}
 
 	s, ok := k.KeySub[KeySub]
 	if !ok {
-		return ""
-	}
-	if s.SubVal == nil {
 		return ""
 	}
 
