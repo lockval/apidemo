@@ -176,7 +176,7 @@ async function Call(name: string, types: any, demoname: string) {
 
     <div v-for="demo in clientobj" :key="demo.name">
       <li>{{ demo.name }}</li>
-      {{ demo.comment }}
+      <v-md-preview :text="demo.comment"></v-md-preview>
 
       <highlightjs autodetect :code="$store.state.getHL(demo.name)" />
       <button @click="jscode(demo.Call.name, demo.name)">JS</button> •

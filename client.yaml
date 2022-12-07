@@ -1,6 +1,8 @@
 
-- name: read&write kv
-  comment: this is a read&write kv example, Count increments by 1
+- name: read and write kv
+  comment: |
+    this is a read and write kv example, Count increments by 1
+    keywords: **GetSubVal, GetAndLock, PutSubVal, PutAndUnlock**
   KeySubList:
     - name: mBase
       comment: Count is a counter
@@ -9,8 +11,10 @@
       comment: 
 
 
-- name: requ&resp
-  comment: this is a requ&resp example
+- name: request and response
+  comment: |
+    this is a request and response example
+    keywords: **input.Requ**
   KeySubList: []
   Call: 
       name: testRequResp
@@ -21,7 +25,9 @@
         param3: boolean
 
 - name: list queue mode
-  comment: In order, push data to the end of the list, and excess data will shift out from the front
+  comment: |
+    In order, push data to the end of the list, and excess data will shift out from the front
+    keywords: **List(**
   KeySubList:
     - name: mList
       comment: list mode
@@ -34,7 +40,9 @@
 
 
 - name: list stack mode
-  comment: First pop up the n pieces behind the old data, and then push data to the end of the list
+  comment: |
+    First pop up the n pieces behind the old data, and then push data to the end of the list
+    keywords: **List(**
   KeySubList:
     - name: mList
       comment: list mode
@@ -45,7 +53,9 @@
         n: number
 
 - name: clear data
-  comment:  Clear data before doing anything
+  comment:  |
+    Clear data before doing anything
+    keywords: **Clear(**
   KeySubList:
     - name: mList
       comment: list mode
@@ -54,14 +64,22 @@
       comment: 
 
 - name: get all data
-  comment:  There are two ways to get all the data
+  comment:  |
+    There are two ways to get all the data
+    - **GetSubVal(input.UID, "mList")**
+    - **GetSubValAll(input.UID, "mList")**
+    
+    other api: **DiscardAndUnlock**
+    - like **PutAndUnlock**, but does not modify any data
   KeySubList: []
   Call: 
       name: testGetAll
       comment: 
 
 - name: put link
-  comment:  Associate other KeySub when putting data
+  comment:  |
+    Associate other KeySub when putting data
+    keywords: **Link(**
   KeySubList:
     - name: mList
       comment: list mode
@@ -75,7 +93,9 @@
         second: string
 
 - name: throw a user error
-  comment: like read&write kv, but execution is interrupted.
+  comment: |
+    like read and write kv, but execution is interrupted.
+    keywords: **Throw(**
   KeySubList:
     - name: mBase
       comment: Count is a counter

@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "@highlightjs/vue-plugin": "^2.1.0",
+    "@kangc/v-md-editor": "^2.3.15",
     "vue": "^3.2.41",
     "vuex": "^4.0.2"
   },
