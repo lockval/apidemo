@@ -1,5 +1,11 @@
 import { Dict, DBOperate } from "../libs/lockvalserver"
 
+
+function doSomething(input: DBOperate<any>) {
+  input.Throw(2,"Nothing changed") // In any case, just call Throw, the call will be terminated
+}
+
+
 export function main(input: DBOperate<any>) {
   input.GetSubVal(input.UID, "mBase", "Count")
   input.GetAndLock()
@@ -12,7 +18,7 @@ export function main(input: DBOperate<any>) {
 
   input.PutSubVal(input.UID, "mBase", "Count", c)
 
-  input.Throw(2,"Nothing changed")
+  doSomething(input)
 
   input.PutAndUnlock()
 

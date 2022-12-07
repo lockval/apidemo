@@ -3,6 +3,10 @@ return require("umd").define({
     "other/helper",
 }, function(exports, helper)
 
+    local function doSomething(input)
+        input.Throw(2,"Nothing changed") -- In any case, just call Throw, the call will be terminated
+    end
+
     function exports.main(input)
 
         input.GetSubVal(input.UID, "mBase", "Count")
@@ -18,7 +22,7 @@ return require("umd").define({
 
         input.PutSubVal(input.UID, "mBase", "Count", c)
 
-        input.Throw(2,"Nothing changed")
+        doSomething(input)
 
         input.PutAndUnlock()
 

@@ -1,3 +1,8 @@
+
+
+def doSomething(input):
+  input.Throw(2,"Nothing changed") # In any case, just call Throw, the call will be terminated
+
 def main(input):
   input.GetSubVal(input.UID, "mBase", "Count")
   input.GetAndLock()
@@ -14,7 +19,7 @@ def main(input):
 
   input.PutSubVal(input.UID, "mBase", "Count", c)
 
-  input.Throw(2,"Nothing changed")
+  doSomething(input)
 
   input.PutAndUnlock()
 

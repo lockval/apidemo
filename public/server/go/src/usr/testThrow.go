@@ -7,6 +7,10 @@ import (
 	"github.com/lockval/go2plugin"
 )
 
+func doSomething(input *go2plugin.Input) {
+	input.Throw(2, "Nothing changed") // In any case, just call Throw, the call will be terminated
+}
+
 func (e export) Export_testThrow(input *go2plugin.Input) map[string]any {
 	input.GetSubVal(input.UID, "mBase", "Count")
 	input.GetAndLock()
@@ -19,7 +23,7 @@ func (e export) Export_testThrow(input *go2plugin.Input) map[string]any {
 
 	input.PutSubVal(input.UID, "mBase", "Count", c)
 
-	input.Throw(2, "Nothing changed")
+	doSomething(input)
 
 	input.PutAndUnlock()
 
