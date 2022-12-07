@@ -10,9 +10,10 @@ export function main(input: DBOperate<any>) {
   ci++
   c = ci.toString()
 
-  input.Throw(2,"my message")
-
   input.PutSubVal(input.UID, "mBase", "Count", c)
+
+  input.Throw(2,"Nothing changed")
+
   input.PutAndUnlock()
 
   return {}
