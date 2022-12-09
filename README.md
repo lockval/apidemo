@@ -6,11 +6,13 @@ You can download and edit client.yaml and public/server/...
 
 to generate your own server
 
+<!-- 
 ### Quick start
 
 ```sh
 npm run buildBothAndPreview
 ```
+-->
 
 ### prepare some tools
 - Node.js
@@ -21,20 +23,16 @@ npm run buildBothAndPreview
 
 ### Project Setup
 
+Download or clone this project code, and execute the following code in the project directory.
+
+
+
 ```sh
 npm install
 ```
 
-### Define variables for your Production environment:
 
-```sh
-export lockvalUpdatefileDomain=127.0.0.1:8080
-export lockvalUpdatefilePassword=123456
-export lockvalGwAddrs=http://127.0.0.1:59501,http://127.0.0.1:59502
-```
-
-
-### Download and start your services
+### Download and start your services (Execute start.sh or start.bat)
 
 - [Linux amd64](https://downloads.lockval.com/v0.0.12.amd64.linux.zip)
 - [Linux arm64](https://downloads.lockval.com/v0.0.12.arm64.linux.zip)
@@ -87,3 +85,11 @@ npm run serverStarBuildAndUpload
 ### Customize your own Authentication server
 
 You can learn how to develop a login(Service AuthN) and a guest(3rd Platform AuthN) [here](https://github.com/lockval/authn)
+
+### Define variables for your Production environment: (If you just want to preview locally, you can ignore this configuration)
+
+```sh
+export lockvalUpdatefileDomain=127.0.0.1:8080
+export lockvalUpdatefilePassword=123456
+export lockvalGwAddrs=http://127.0.0.1:59501,http://127.0.0.1:59502
+```

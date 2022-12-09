@@ -9,7 +9,6 @@ import hljs from "highlight.js/lib/core";
 import javascript from "highlight.js/lib/languages/javascript";
 import hljsVuePlugin from "@highlightjs/vue-plugin";
 
-
 import VMdPreview from "@kangc/v-md-editor/lib/preview";
 import "@kangc/v-md-editor/lib/style/preview.css";
 import vuepressTheme from "@kangc/v-md-editor/lib/theme/vuepress.js";

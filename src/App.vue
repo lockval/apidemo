@@ -144,6 +144,11 @@ async function Call(name: string, types: any, demoname: string) {
     <p>
       locKVal is a distributed key-value service engine that can run scripts.
     </p>
+    <p>
+      You can
+      <a href="https://github.com/lockval/apidemo" target="_blank">download</a>
+      it to build your own server
+    </p>
     <br />
     <p>On the server side, you can write in the following languages:</p>
     <p class="red">Javascript/TypeScript, Go, Lua, Starlark(like Python)</p>
