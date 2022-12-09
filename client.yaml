@@ -102,3 +102,12 @@
   Call: 
       name: testThrow
       comment: 
+
+- name: advanced query
+  comment: |
+    In addition to **GetSubVal** and **GetSubValAll**, we also provide other query methods.
+    keywords: **Group, Len, Max, Min, Random, Range, Search, Sum, Unique, **
+  KeySubList: []
+  Call: 
+      name: testOtherQuery
+      comment: 
