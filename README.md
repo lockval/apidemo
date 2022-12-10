@@ -15,6 +15,7 @@ npm run buildBothAndPreview
 -->
 
 ### prepare some tools
+- Git
 - Node.js
 - curl
 - Go (1.19)

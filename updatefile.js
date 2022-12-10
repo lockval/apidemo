@@ -4,23 +4,33 @@ let password = process.env.lockvalUpdatefilePassword;
 if (!mydomain) mydomain = "127.0.0.1:8080";
 if (!password) password = "123456";
 
-let url = "https://" + mydomain + "/main?pwd=" + password
-// console.log(url);
-
-
-
+const { exit } = require("node:process");
 const { exec } = require("child_process");
+function execCmd(cmd){
+  exec(cmd, (error, stdout, stderr) => {
+    if (error) {
+      console.log(`error: ${error.message}`);
+      exit(1);
+    }
+    if (stderr) {
+      console.log(`stderr: ${stderr}`);
+      // exit(2);
+    }
+    console.log(`stdout: ${stdout}`);
+  });
+  
+}
 
-let cmd = "curl --insecure -X POST --data-binary @" + process.argv[2] + " " + url
+let url=""
+let cmd=""
 
-exec(cmd, (error, stdout, stderr) => {
-  if (error) {
-    console.log(`error: ${error.message}`);
-    return 1;
-  }
-  if (stderr) {
-    console.log(`stderr: ${stderr}`);
-    // return 2;
-  }
-  console.log(`stdout: ${stdout}`);
-});
+// upload main.json (config)
+url = "https://" + mydomain + "/main.json?pwd=" + password
+cmd = "curl --insecure -X POST --data-binary @public/main.json" + " " + url
+execCmd(cmd)
+
+// upload server
+url = "https://" + mydomain + "/main?pwd=" + password
+cmd = "curl --insecure -X POST --data-binary @" + process.argv[2] + " " + url
+execCmd(cmd)
+

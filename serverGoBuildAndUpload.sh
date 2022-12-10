@@ -24,7 +24,9 @@ GoPluginMagicModule="GoPluginMagicModule"$(date +%s)
 find . -name '*.go' | xargs perl -pi -e "s|GoPluginMagicModule|${GoPluginMagicModule}|g"
 find . -name 'go.mod' | xargs perl -pi -e "s|GoPluginMagicModule|${GoPluginMagicModule}|g"
 
-go build -trimpath -buildmode=plugin -o dist/main.elf ./main && curl --insecure -X POST --data-binary @dist/main.elf https://${UpdatefileDomain}/main?pwd=${UpdatefilePassword}
+go build -trimpath -buildmode=plugin -o dist/main.elf ./main && \
+curl --insecure -X POST --data-binary @../../../public/main.json https://${UpdatefileDomain}/main.json?pwd=${UpdatefilePassword} && \
+curl --insecure -X POST --data-binary @dist/main.elf https://${UpdatefileDomain}/main?pwd=${UpdatefilePassword}
 
 find . -name 'go.mod' | xargs perl -pi -e "s|${GoPluginMagicModule}|GoPluginMagicModule|g"
 find . -name '*.go' | xargs perl -pi -e "s|${GoPluginMagicModule}|GoPluginMagicModule|g"

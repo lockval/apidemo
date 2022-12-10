@@ -1,0 +1,19 @@
+{
+  "string": "mystring",
+  "number": 3.14,
+  "boolean": true,
+  "array": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "object": {
+    "a": 6,
+    "b": 7,
+    "c": 8,
+    "d": 9,
+    "e": 10
+  }
+}
