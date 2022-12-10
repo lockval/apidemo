@@ -1,5 +1,5 @@
 {
-  "string": "mystring",
+  "string": "This is a configuration file",
   "number": 3.14,
   "boolean": true,
   "array": [

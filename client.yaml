@@ -1,3 +1,26 @@
+- name: request, response and config
+  comment: |
+    This example will show you how to read user input and config file and return them to the client
+    keywords: **input.Requ, ExcelConfig**
+    The config file is main.json, you can display it directly on the button above
+    When you execute:
+      - npm run serverJsBuildAndUpload
+      - npm run serverLuaBuildAndUpload
+      - npm run serverStarBuildAndUpload
+      - ./serverGoBuildAndUpload.sh
+    
+    The above script will first upload main.json and then upload the server script
+    **Please note**: If you want the config file to take effect, you must change the server code.
+  KeySubList: []
+  Call: 
+      name: testRequResp
+      comment: 
+      params:
+        param1: string
+        param2: number
+        param3: boolean
+
+
 
 - name: read and write kv
   comment: |
@@ -11,18 +34,6 @@
       comment: 
 
 
-- name: request and response
-  comment: |
-    this is a request and response example
-    keywords: **input.Requ**
-  KeySubList: []
-  Call: 
-      name: testRequResp
-      comment: 
-      params:
-        param1: string
-        param2: number
-        param3: boolean
 
 - name: list queue mode
   comment: |

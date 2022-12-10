@@ -80,6 +80,16 @@ function clientCode() {
   }
 }
 
+function mainJSON() {
+  if (!store.state.config.clientCode) {
+    fetch("./main.json")
+      .then((resp) => resp.text())
+      .then((data) => store.commit("setConfig", { k: "clientCode", v: data }));
+  } else {
+    store.commit("setConfig", { k: "clientCode", v: "" });
+  }
+}
+
 // window.open("./server/javascript/src/usr/" + callname + ".ts");
 async function jscode(callname: string, demoname: string) {
   fetch("./server/javascript/src/usr/" + callname + ".ts")
@@ -172,6 +182,7 @@ async function Call(name: string, types: any, demoname: string) {
     x.Name = <input @input="input" v-model="$store.state.config.guestname" /> //
     refresh takes effect<br />
     <button @click="clientCode()">show / hide client code</button><br />
+    <button @click="mainJSON()">show / hide main.json (config)</button><br />
     <highlightjs language="typescript" :code="$store.state.config.clientCode" />
 
     console.log(this.UID);<br />
