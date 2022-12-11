@@ -194,58 +194,62 @@ async function Call(name: string, types: any, demoname: string) {
       <li>{{ demo.name }}</li>
       <v-md-preview :text="demo.comment"></v-md-preview>
 
-      <highlightjs autodetect :code="$store.state.getHL(demo.name)" />
-      <button @click="jscode(demo.Call.name, demo.name)">JS</button> •
-      <button @click="gocode(demo.Call.name, demo.name)">Go</button> •
-      <button @click="luacode(demo.Call.name, demo.name)">Lua</button> •
-      <button @click="starcode(demo.Call.name, demo.name)">Starlark</button> ---
-      <button @click="Call(demo.Call.name, demo.Call.params, demo.name)">
-        Call "{{ demo.Call.name }}"
-      </button>
-      {
+      <template v-if="demo.Call">
+        <highlightjs autodetect :code="$store.state.getHL(demo.name)" />
+        <button @click="jscode(demo.Call.name, demo.name)">JS</button> •
+        <button @click="gocode(demo.Call.name, demo.name)">Go</button> •
+        <button @click="luacode(demo.Call.name, demo.name)">Lua</button> •
+        <button @click="starcode(demo.Call.name, demo.name)">Starlark</button>
+        ---
+        <button @click="Call(demo.Call.name, demo.Call.params, demo.name)">
+          Call "{{ demo.Call.name }}"
+        </button>
+        {
 
-      <span v-for="(val, key) in demo.Call.params" :key="key">
-        {{ key }} {{ val }}<input :type="val" v-model="params[key]" />,
-      </span>
-      }
-      <div v-for="KeySub in demo.KeySubList" :key="KeySub.name">
-        KeySub: {{ KeySub.name }}
+        <span v-for="(val, key) in demo.Call.params" :key="key">
+          {{ key }} {{ val }}<input :type="val" v-model="params[key]" />,
+        </span>
+        }
 
-        <table>
-          <tr>
-            <td>old( onchange_{{ KeySub.name }} .. let oldV .. )</td>
-            <td>change( onchange_{{ KeySub.name }} .. let chgV .. )</td>
-            <td>new( contextObject.ChangeName=="{{ KeySub.name }}" .. )</td>
-          </tr>
-          <tr>
-            <td>
-              <textarea
-                readonly
-                rows="10"
-                cols="54"
-                v-model="$store.state.oldV[KeySub.name]"
-              ></textarea>
-            </td>
-            <td>
-              <textarea
-                readonly
-                rows="10"
-                cols="54"
-                v-model="$store.state.chgV[KeySub.name]"
-              ></textarea>
-            </td>
-            <td>
-              <textarea
-                readonly
-                rows="10"
-                cols="54"
-                v-model="$store.state.newV[KeySub.name]"
-              ></textarea>
-            </td>
-          </tr>
-        </table>
-      </div>
+        <div v-for="KeySub in demo.KeySubList" :key="KeySub.name">
+          KeySub: {{ KeySub.name }}
 
+          <table>
+            <tr>
+              <td>old( onchange_{{ KeySub.name }} .. let oldV .. )</td>
+              <td>change( onchange_{{ KeySub.name }} .. let chgV .. )</td>
+              <td>new( contextObject.ChangeName=="{{ KeySub.name }}" .. )</td>
+            </tr>
+            <tr>
+              <td>
+                <textarea
+                  readonly
+                  rows="10"
+                  cols="54"
+                  v-model="$store.state.oldV[KeySub.name]"
+                ></textarea>
+              </td>
+              <td>
+                <textarea
+                  readonly
+                  rows="10"
+                  cols="54"
+                  v-model="$store.state.chgV[KeySub.name]"
+                ></textarea>
+              </td>
+              <td>
+                <textarea
+                  readonly
+                  rows="10"
+                  cols="54"
+                  v-model="$store.state.newV[KeySub.name]"
+                ></textarea>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </template>
+      <template v-else> </template>
       <br /><br /><br /><br />
     </div>
   </main>

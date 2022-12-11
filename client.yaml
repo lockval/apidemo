@@ -50,6 +50,7 @@
         second: string
 
 
+
 - name: list stack mode
   comment: |
     First pop up the n pieces behind the old data, and then push data to the end of the list
@@ -62,6 +63,8 @@
       comment: 
       params:
         n: number
+
+
 
 - name: clear data
   comment:  |
@@ -87,6 +90,8 @@
       name: testGetAll
       comment: 
 
+
+
 - name: put link
   comment:  |
     Associate other KeySub when putting data
@@ -103,6 +108,8 @@
         first: string
         second: string
 
+
+
 - name: throw a user error
   comment: |
     like read and write kv, but execution is interrupted.
@@ -114,6 +121,8 @@
       name: testThrow
       comment: 
 
+
+
 - name: advanced query
   comment: |
     In addition to **GetSubVal** and **GetSubValAll**, we also provide other query methods.
@@ -122,3 +131,19 @@
   Call: 
       name: testOtherQuery
       comment: 
+
+
+
+- name: Prepare a globalChat struct
+  comment: |
+    Prepare a new public data structure
+  KeySubList:
+    - name: mChatList
+      comment: chat history here
+  StructName: 
+      name: globalChat
+      comment: 
+
+
+
+

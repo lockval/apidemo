@@ -5,6 +5,8 @@ import {
   type LoginByMethod,
 } from "./paclient";
 
+//repl5
+
 export class UserData extends UserDataBase {
   eventTarget = new EventTarget();
   nowDemoName = "";
