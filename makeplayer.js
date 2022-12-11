@@ -89,6 +89,9 @@ if(process.env.lockvalGwAddrs){
   repl4=process.env.lockvalGwAddrs;
 }
 
+console.log("-------------------");
+console.log(repl4);
+console.log("-------------------");
 
 output = output.replace(repl1tmp, repl1);
 output = output.replace(repl2tmp, repl2);
