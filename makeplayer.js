@@ -4,40 +4,90 @@ let fs = require("fs");
 var Mustache = require("mustache");
 
 let demoList = JSON.parse(fs.readFileSync("./src/assets/client.json", "utf8"));
-let output = fs.readFileSync("./public/client/player.temp.ts", "utf8");
+
+let outputMain = fs.readFileSync("./public/client/player.temp.ts", "utf8");
+let outputStruct = fs.readFileSync("./public/client/struct.temp.ts", "utf8");
 
 let repl1tmp = "  //repl1";
 let repl2tmp = "  //repl2";
 let repl3tmp = "    //repl3";
 let repl4tmp = "//repl4";
+let repl5tmp = "//repl5";
 
-let view = {
-  KeySubList: [],
-};
+let structTemp = "structTemp";
 
-let KeySubObjs = {};
+class View{
+  KeySubList = []
+  KeySubObjs = {};
+}
+
+let view = new View()
+
+let structView = {
+  StructNameList: [],
+  StructName2view: {}, //StructName.name:View
+}
+
 for (let demo of demoList) {
-  if (demo.KeySubList) {
-    for (let KeySub of demo.KeySubList) {
-      if (KeySubObjs[KeySub.name]) {
-        KeySubObjs[KeySub.name].demoList.push({ name: demo.name });
-      } else {
-        KeySubObjs[KeySub.name] = {
-          name: KeySub.name,
-          comment: KeySub.comment,
-          demoList: [{ name: demo.name }],
-        };
+  if(demo.StructName){
+    if(!demo.Call){
+      structView.StructNameList.push( { name: demo.StructName.name } )
+      structView.StructName2view[demo.StructName.name]=new View();
+    }else{
+      if (demo.KeySubList) {
+        let KeySubObjs = structView.StructName2view[demo.StructName.name].KeySubObjs;
+        for (let KeySub of demo.KeySubList) {
+          if (KeySubObjs[KeySub.name]) {
+            KeySubObjs[KeySub.name].demoList.push({ name: demo.name });
+          } else {
+            KeySubObjs[KeySub.name] = {
+              name: KeySub.name,
+              sName: demo.StructName.name+"_",
+              sID: demo.StructName.id+"_",
+              comment: KeySub.comment,
+              demoList: [{ name: demo.name }],
+            };
+          }
+        }
+      }
+    }
+    
+  }else{
+    if (demo.KeySubList) {
+      let KeySubObjs = view.KeySubObjs;
+      for (let KeySub of demo.KeySubList) {
+        if (KeySubObjs[KeySub.name]) {
+          KeySubObjs[KeySub.name].demoList.push({ name: demo.name });
+        } else {
+          KeySubObjs[KeySub.name] = {
+            name: KeySub.name,
+            sName: "",
+            sID: "",
+            comment: KeySub.comment,
+            demoList: [{ name: demo.name }],
+          };
+        }
       }
     }
   }
+
 }
-view.KeySubList = Object.values(KeySubObjs);
+
+
+view.KeySubList = Object.values(view.KeySubObjs);
+
+for(let StructName in structView.StructName2view){
+  let viewS = structView.StructName2view[StructName];
+  viewS.KeySubList = Object.values(viewS.KeySubObjs);
+}
+
+function repl123(v){
 
 let repl1 = Mustache.render(
   `{{#KeySubList}}
   {{name}}     = this.regMap("{{name}}", this.onchange_{{name}}); // {{& comment}}
 {{/KeySubList}}`,
-  view
+  v
 );
 
 let repl2 = Mustache.render(
@@ -51,9 +101,9 @@ let repl2 = Mustache.render(
     change.forEach((v,k)=>{
       chgV+=k+":"+v+"\\n";
     })
-    this.eventTarget.dispatchEvent(
+    eventTarget.dispatchEvent(
       new CustomEvent("postOldAndChg",{detail:{
-        name:"{{name}}",
+        name:"{{sName}}{{sID}}{{name}}",
         oldV:oldV,
         chgV:chgV,
       }}))
@@ -63,7 +113,7 @@ let repl2 = Mustache.render(
   }
 
 {{/KeySubList}}`,
-  view
+  v
 );
 
 let repl3 = Mustache.render(
@@ -74,29 +124,63 @@ let repl3 = Mustache.render(
       this.{{name}}.forEach((v,k)=>{
         newV+=k+":"+v+"\\n";
       })
-      this.eventTarget.dispatchEvent(
+      eventTarget.dispatchEvent(
         new CustomEvent("postNew",{detail:{
-          name:"{{name}}",
+          name:"{{sName}}{{sID}}{{name}}",
           newV:newV,
         }}))
     }
 {{/KeySubList}}`,
-  view
+  v
 );
+
+return [repl1,repl2,repl3];
+
+}
+
+let [repl1,repl2,repl3] = repl123(view)
 
 let repl4="http://127.0.0.1:59501,http://127.0.0.1:59502";
 if(process.env.lockvalGwAddrs){
   repl4=process.env.lockvalGwAddrs;
 }
 
+let repl5 = Mustache.render(
+  `{{#StructNameList}}
+import { {{name}}Data } from "./struct_{{name}}";
+{{/StructNameList}}`,
+  structView
+);
+
 console.log("-------------------");
 console.log(repl4);
 console.log("-------------------");
 
-output = output.replace(repl1tmp, repl1);
-output = output.replace(repl2tmp, repl2);
-output = output.replace(repl3tmp, repl3);
-output = output.replace(repl4tmp, repl4);
+outputMain = outputMain.replace(repl1tmp, repl1);
+outputMain = outputMain.replace(repl2tmp, repl2);
+outputMain = outputMain.replace(repl3tmp, repl3);
+outputMain = outputMain.replace(repl4tmp, repl4);
+outputMain = outputMain.replace(repl5tmp, repl5);
 
-fs.writeFileSync("./public/client/player.ts", output, "utf8");
+fs.writeFileSync("./public/client/player.ts", outputMain, "utf8");
+
+
+
+for(let StructName in structView.StructName2view){
+  
+  let myview = structView.StructName2view[StructName]
+
+  // console.log("!!!",StructName, myview);
+
+  let [repl1,repl2,repl3] = repl123(myview)
+
+  let outputStructGen = outputStruct.replace(repl1tmp, repl1);
+  outputStructGen = outputStructGen.replace(repl2tmp, repl2);
+  outputStructGen = outputStructGen.replace(repl3tmp, repl3);
+  outputStructGen = outputStructGen.replace(structTemp, StructName);
+
+
+  fs.writeFileSync(`./public/client/struct_${StructName}.ts`, outputStructGen, "utf8");
+}
+
 // console.log(repl1);

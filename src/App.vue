@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import clientobj from "./assets/client.json";
-import { Player } from "../public/client/player";
+import { Player, eventTarget } from "../public/client/player";
 
 import { store, type Dict } from "./g/data";
 import { onMounted } from "vue";
@@ -31,24 +31,24 @@ onMounted(() => {
   }
   store.commit("setConfig", { k: "guestname", v: guestname });
 
-  player.userData.eventTarget.addEventListener("OnLogin", () => {
-    store.commit("setConfig", { k: "UID", v: player.UID });
+  eventTarget.addEventListener("OnLogin", () => {
+    store.commit("setConfig", { k: "UID", v: player.userData.UID });
     console.log("OnLogin");
   });
-  player.userData.eventTarget.addEventListener("OnDisconnect", (e: any) => {
+  eventTarget.addEventListener("OnDisconnect", (e: any) => {
     console.log("OnDisconnect", e.detail);
   });
-  player.userData.eventTarget.addEventListener("postOldAndChg", (e: any) => {
+  eventTarget.addEventListener("postOldAndChg", (e: any) => {
     store.commit("setOld", { k: e.detail.name, v: e.detail.oldV });
     store.commit("setChg", { k: e.detail.name, v: e.detail.chgV });
   });
-  player.userData.eventTarget.addEventListener("postNew", (e: any) => {
+  eventTarget.addEventListener("postNew", (e: any) => {
     store.commit("setNew", { k: e.detail.name, v: e.detail.newV });
   });
   player.InitWindow();
 
   player.guestname = guestname;
-  player.Open(1);
+  player.Open(null);
 });
 
 function toBoolean(v: any): boolean {
@@ -90,6 +90,16 @@ function mainJSON() {
   }
 }
 
+function Watch(StructName: string, id: string) {}
+
+function WatchClose(StructName: string, id: string) {}
+
+async function structCode(structName: string, demoname: string) {
+  fetch("./client/struct_" + structName + ".ts")
+    .then((resp) => resp.text())
+    .then((data) => store.commit("setCode", { k: demoname, v: data }));
+}
+
 // window.open("./server/javascript/src/usr/" + callname + ".ts");
 async function jscode(callname: string, demoname: string) {
   fetch("./server/javascript/src/usr/" + callname + ".ts")
@@ -110,6 +120,36 @@ async function starcode(callname: string, demoname: string) {
   fetch("./server/starlark/src/usr/" + callname + ".star")
     .then((resp) => resp.text())
     .then((data) => store.commit("setCode", { k: demoname, v: data }));
+}
+
+function GetoldV(demo: any, KeySubName: string) {
+  if (demo.StructName) {
+    return store.state.oldV[
+      demo.StructName.name + "_" + demo.StructName.id + "_" + KeySubName
+    ];
+  } else {
+    return store.state.oldV[KeySubName];
+  }
+}
+
+function GetchgV(demo: any, KeySubName: string) {
+  if (demo.StructName) {
+    return store.state.chgV[
+      demo.StructName.name + "_" + demo.StructName.id + "_" + KeySubName
+    ];
+  } else {
+    return store.state.chgV[KeySubName];
+  }
+}
+
+function GetnewV(demo: any, KeySubName: string) {
+  if (demo.StructName) {
+    return store.state.newV[
+      demo.StructName.name + "_" + demo.StructName.id + "_" + KeySubName
+    ];
+  } else {
+    return store.state.newV[KeySubName];
+  }
 }
 
 async function Call(name: string, types: any, demoname: string) {
@@ -179,23 +219,30 @@ async function Call(name: string, types: any, demoname: string) {
     <p>This site is still under construction</p>
     <br /><br /><br />
 
-    x.Name = <input @input="input" v-model="$store.state.config.guestname" /> //
+    guestname = <input @input="input" v-model="$store.state.config.guestname" /> //
     refresh takes effect<br />
     <button @click="clientCode()">show / hide client code</button><br />
     <button @click="mainJSON()">show / hide main.json (config)</button><br />
     <highlightjs language="typescript" :code="$store.state.config.clientCode" />
 
-    console.log(this.UID);<br />
+    <highlightjs
+      language="typescript"
+      code='import { Player } from "./player";
+let player = new Player();
+player.guestname = guestname;
+player.Open(null);
+    '
+    />
+    console.log(this.userData.UID);<br />
     {{ $store.state.config.UID }}<br />
 
-    <br /><br /><br />
+    <br /><br /><br />Call
 
     <div v-for="demo in clientobj" :key="demo.name">
       <li>{{ demo.name }}</li>
       <v-md-preview :text="demo.comment"></v-md-preview>
-
+      <highlightjs autodetect :code="$store.state.getHL(demo.name)" />
       <template v-if="demo.Call">
-        <highlightjs autodetect :code="$store.state.getHL(demo.name)" />
         <button @click="jscode(demo.Call.name, demo.name)">JS</button> •
         <button @click="gocode(demo.Call.name, demo.name)">Go</button> •
         <button @click="luacode(demo.Call.name, demo.name)">Lua</button> •
@@ -212,7 +259,11 @@ async function Call(name: string, types: any, demoname: string) {
         }
 
         <div v-for="KeySub in demo.KeySubList" :key="KeySub.name">
-          KeySub: {{ KeySub.name }}
+          <template v-if="demo.StructName">
+            KeySub: {{ demo.StructName.name }}:{{ demo.StructName.id }}
+            {{ KeySub.name }}
+          </template>
+          <template v-else> KeySub: {{ KeySub.name }} </template>
 
           <table>
             <tr>
@@ -226,7 +277,7 @@ async function Call(name: string, types: any, demoname: string) {
                   readonly
                   rows="10"
                   cols="54"
-                  v-model="$store.state.oldV[KeySub.name]"
+                  :value="GetoldV(demo, KeySub.name)"
                 ></textarea>
               </td>
               <td>
@@ -234,7 +285,7 @@ async function Call(name: string, types: any, demoname: string) {
                   readonly
                   rows="10"
                   cols="54"
-                  v-model="$store.state.chgV[KeySub.name]"
+                  :value="GetchgV(demo, KeySub.name)"
                 ></textarea>
               </td>
               <td>
@@ -242,14 +293,28 @@ async function Call(name: string, types: any, demoname: string) {
                   readonly
                   rows="10"
                   cols="54"
-                  v-model="$store.state.newV[KeySub.name]"
+                  :value="GetnewV(demo, KeySub.name)"
                 ></textarea>
               </td>
             </tr>
           </table>
         </div>
       </template>
-      <template v-else> </template>
+      <template v-else>
+        <button @click="structCode(demo.StructName.name, demo.name)">
+          show client code "struct_{{ demo.StructName.name }}.ts"
+        </button>
+        <div v-for="id in demo.IDs" :key="id">
+          <button @click="Watch(demo.StructName.name, id)">
+            Watch("{{ demo.StructName.name }}:{{ id }}",{{
+              demo.StructName.name
+            }}Data);
+          </button>
+          <button @click="WatchClose(demo.StructName.name, id)">
+            WatchClose("{{ demo.StructName.name }}:{{ id }}");
+          </button>
+        </div>
+      </template>
       <br /><br /><br /><br />
     </div>
   </main>

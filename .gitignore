@@ -32,6 +32,7 @@ coverage
 # gen by client.yaml
 
 public/client/player.ts
+public/client/struct_*.ts
 src/assets/client.json
 
 # gen by server/

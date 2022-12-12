@@ -5,10 +5,12 @@ import {
   type LoginByMethod,
 } from "./paclient";
 
+export const eventTarget = new EventTarget();
+
+// import others Struct for watch
 //repl5
 
 export class UserData extends UserDataBase {
-  eventTarget = new EventTarget();
   nowDemoName = "";
 
   protected UpdateAfter(contextObject: any): void {
@@ -35,14 +37,14 @@ export class Player extends paclient {
   userData = new UserData();
 
   protected OnDisconnect(reason: string): void {
-    this.userData.eventTarget.dispatchEvent(
+    eventTarget.dispatchEvent(
       new CustomEvent("OnDisconnect", { detail: reason })
     );
   }
 
   protected OnLogin(): void {
-    console.log(this.UID);
-    this.userData.eventTarget.dispatchEvent(new CustomEvent("OnLogin"));
+    console.log(this.userData.UID);
+    eventTarget.dispatchEvent(new CustomEvent("OnLogin"));
   }
 
   protected OnPleaseLogin(logindata: any): Promise<LoginByMethod> {

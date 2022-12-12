@@ -3,6 +3,7 @@
 // OnKeySub...
 // UpdateAfter
 export abstract class UserDataBase {
+  public UID = ""; //UID
   private metaData = new Map<string, metaDef>();
 
   protected abstract UpdateAfter(contextObject: Object): void; //After updating the data
@@ -241,9 +242,9 @@ export abstract class paclient extends Base {
   protected abstract OnPleaseLogin(logindata: any): Promise<LoginByMethod>; //Get login module and information
   protected abstract OnLoginInfo(logindata: any): LoginInfo; //Get login address and bucket
 
-  // about storage and UID
+  // about storage
   private bucket = ""; //storage bucket
-  public UID = ""; //user id
+
   // about websocket
   private loginStep = 0; // login step
   private reconnMs = 16; // wait for reconnect time
@@ -343,7 +344,7 @@ export abstract class paclient extends Base {
     }
 
     const respdata: LoginRequ = await resp.json();
-    this.UID = respdata.UID;
+    this.userData.UID = respdata.UID;
     _saveLocalData(this.bucket, respdata);
 
     this.ws = ws;
@@ -571,7 +572,7 @@ export abstract class paclient extends Base {
 
           let b = this;
 
-          if (UpdateData["ID"] != this.UID) {
+          if (UpdateData["ID"] != this.userData.UID) {
             b = this.watchMgr[UpdateData["ID"]];
             if (!b) {
               if (UpdateData["ID"] in this.watchData) {
@@ -635,6 +636,7 @@ export abstract class paclient extends Base {
     const sub = <any>new paclientSub();
 
     sub.userData = new dataCls();
+    sub.userData.UID = watchuid;
     this.watchMgr[watchuid] = sub;
     sub._onLogin(data);
     for (const UpdateData of this.watchData[watchuid]) {

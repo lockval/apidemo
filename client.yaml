@@ -137,12 +137,25 @@
 - name: Prepare a globalChat struct
   comment: |
     Prepare a new public data structure
+  StructName: 
+      name: globalChat
+      comment: 
+  IDs: [the001]
+
+- name: send A message to globalChat
+  comment: |
+    send A message to globalChat
   KeySubList:
     - name: mChatList
       comment: chat history here
   StructName: 
       name: globalChat
+      id: the001
       comment: 
+  Call: 
+      name: testOtherQuery
+      comment: 
+
 
 
 
