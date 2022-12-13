@@ -3,6 +3,7 @@ import {
   paclient,
   type LoginInfo,
   type LoginByMethod,
+  type Dict,
 } from "./paclient";
 
 export const eventTarget = new EventTarget();

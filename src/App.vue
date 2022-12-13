@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import clientobj from "./assets/client.json";
-import { Player, eventTarget } from "../public/client/player";
+import { Player, eventTarget, structDict } from "../public/client/player";
 
 import { store, type Dict } from "./g/data";
 import { onMounted } from "vue";
@@ -25,6 +25,10 @@ function makeid(length: number) {
 onMounted(() => {
   let guestname = window.localStorage.getItem("guestname");
 
+  fetch("./main.json")
+    .then((resp) => resp.text())
+    .then((data) => store.commit("setConfig", { k: "jsonCode", v: data }));
+
   if (!guestname) {
     guestname = makeid(16);
     window.localStorage.setItem("guestname", guestname);
@@ -37,6 +41,7 @@ onMounted(() => {
   });
   eventTarget.addEventListener("OnDisconnect", (e: any) => {
     console.log("OnDisconnect", e.detail);
+    store.commit("disconnect");
   });
   eventTarget.addEventListener("postOldAndChg", (e: any) => {
     store.commit("setOld", { k: e.detail.name, v: e.detail.oldV });
@@ -80,19 +85,24 @@ function clientCode() {
   }
 }
 
-function mainJSON() {
-  if (!store.state.config.clientCode) {
-    fetch("./main.json")
-      .then((resp) => resp.text())
-      .then((data) => store.commit("setConfig", { k: "clientCode", v: data }));
-  } else {
-    store.commit("setConfig", { k: "clientCode", v: "" });
+async function Watch(StructName: string, id: string) {
+  let resp = await player.Watch(StructName + ":" + id, structDict[StructName]);
+  if (resp) {
+    store.commit("setWatch", { k: StructName + ":" + id, v: true });
   }
 }
 
-function Watch(StructName: string, id: string) {}
+function structName(KeySub: any) {
+  return !!KeySub["structName"];
+}
+function structNameID(KeySub: any) {
+  return '"' + KeySub["structName"] + ":" + KeySub["structID"] + '"';
+}
 
-function WatchClose(StructName: string, id: string) {}
+function WatchClose(StructName: string, id: string) {
+  player.WatchClose(StructName + ":" + id);
+  store.commit("setWatch", { k: StructName + ":" + id, v: false });
+}
 
 async function structCode(structName: string, demoname: string) {
   fetch("./client/struct_" + structName + ".ts")
@@ -122,33 +132,54 @@ async function starcode(callname: string, demoname: string) {
     .then((data) => store.commit("setCode", { k: demoname, v: data }));
 }
 
-function GetoldV(demo: any, KeySubName: string) {
-  if (demo.StructName) {
+async function jswatch(demoname: string) {
+  fetch("./server/javascript/src/watch.ts")
+    .then((resp) => resp.text())
+    .then((data) => store.commit("setCode", { k: demoname, v: data }));
+}
+async function gowatch(demoname: string) {
+  fetch("./server/go/src/watch.go")
+    .then((resp) => resp.text())
+    .then((data) => store.commit("setCode", { k: demoname, v: data }));
+}
+async function luawatch(demoname: string) {
+  fetch("./server/lua/src/watch.lua")
+    .then((resp) => resp.text())
+    .then((data) => store.commit("setCode", { k: demoname, v: data }));
+}
+async function starwatch(demoname: string) {
+  fetch("./server/starlark/src/watch.star")
+    .then((resp) => resp.text())
+    .then((data) => store.commit("setCode", { k: demoname, v: data }));
+}
+
+function GetoldV(KeySub: any) {
+  if (KeySub.structName) {
     return store.state.oldV[
-      demo.StructName.name + "_" + demo.StructName.id + "_" + KeySubName
+      KeySub.structName + "_" + KeySub.structID + "_" + KeySub.name
     ];
   } else {
-    return store.state.oldV[KeySubName];
+    return store.state.oldV[KeySub.name];
   }
 }
 
-function GetchgV(demo: any, KeySubName: string) {
-  if (demo.StructName) {
+function GetchgV(KeySub: any) {
+  if (KeySub.structName) {
     return store.state.chgV[
-      demo.StructName.name + "_" + demo.StructName.id + "_" + KeySubName
+      KeySub.structName + "_" + KeySub.structID + "_" + KeySub.name
     ];
   } else {
-    return store.state.chgV[KeySubName];
+    return store.state.chgV[KeySub.name];
   }
 }
 
-function GetnewV(demo: any, KeySubName: string) {
-  if (demo.StructName) {
+function GetnewV(KeySub: any) {
+  if (KeySub.structName) {
     return store.state.newV[
-      demo.StructName.name + "_" + demo.StructName.id + "_" + KeySubName
+      KeySub.structName + "_" + KeySub.structID + "_" + KeySub.name
     ];
   } else {
-    return store.state.newV[KeySubName];
+    return store.state.newV[KeySub.name];
   }
 }
 
@@ -220,14 +251,16 @@ async function Call(name: string, types: any, demoname: string) {
     <br /><br /><br />
 
     <hr />
+    ▼ client code
     <br />
+    <br />
+    <button @click="clientCode()">show / hide player.ts</button><br />
+    <highlightjs language="typescript" :code="$store.state.config.clientCode" />
+    <br />
+    your entry code:<br />
     guestname =
     <input @input="input" v-model="$store.state.config.guestname" /> // refresh
     takes effect<br />
-    <button @click="clientCode()">show / hide player.ts</button><br />
-    <button @click="mainJSON()">show / hide main.json</button><br />
-    <highlightjs language="typescript" :code="$store.state.config.clientCode" />
-    <br />
     <highlightjs
       language="typescript"
       code='import { Player } from "./player";
@@ -237,9 +270,15 @@ player.Open(null);
     '
     />
     <br />
+    In player.ts you can check your UID<br />
     <highlightjs language="typescript" code="console.log(this.userData.UID);" />
+    {{ $store.state.config.UID }}<br /><br /><br />
 
-    {{ $store.state.config.UID }}<br />
+    <hr />
+    <details>
+      <summary>main.json (config)</summary>
+      <highlightjs language="json" :code="$store.state.config.jsonCode" />
+    </details>
 
     <br /><br /><br />
 
@@ -258,7 +297,7 @@ player.Open(null);
           <button @click="starcode(demo.Call.name, demo.name)">Starlark</button>
           ---
           <button @click="Call(demo.Call.name, demo.Call.params, demo.name)">
-            Call "{{ demo.Call.name }}"
+            player.Call("{{ demo.Call.name }}",obj)
           </button>
           {
 
@@ -268,9 +307,8 @@ player.Open(null);
           }
 
           <div v-for="KeySub in demo.KeySubList" :key="KeySub.name">
-            <template v-if="demo.StructName">
-              KeySub: {{ demo.StructName.name }}:{{ demo.StructName.id }}
-              {{ KeySub.name }}
+            <template v-if="structName(KeySub)">
+              {{ structNameID(KeySub) }} KeySub: {{ KeySub.name }}
             </template>
             <template v-else> KeySub: {{ KeySub.name }} </template>
 
@@ -286,7 +324,7 @@ player.Open(null);
                     readonly
                     rows="10"
                     cols="54"
-                    :value="GetoldV(demo, KeySub.name)"
+                    :value="GetoldV(KeySub)"
                   ></textarea>
                 </td>
                 <td>
@@ -294,7 +332,7 @@ player.Open(null);
                     readonly
                     rows="10"
                     cols="54"
-                    :value="GetchgV(demo, KeySub.name)"
+                    :value="GetchgV(KeySub)"
                   ></textarea>
                 </td>
                 <td>
@@ -302,7 +340,7 @@ player.Open(null);
                     readonly
                     rows="10"
                     cols="54"
-                    :value="GetnewV(demo, KeySub.name)"
+                    :value="GetnewV(KeySub)"
                   ></textarea>
                 </td>
               </tr>
@@ -310,17 +348,30 @@ player.Open(null);
           </div>
         </template>
         <template v-else>
+          <button @click="jswatch(demo.name)">JS</button> •
+          <button @click="gowatch(demo.name)">Go</button> •
+          <button @click="luawatch(demo.name)">Lua</button> •
+          <button @click="starwatch(demo.name)">Starlark</button>
+          ---
           <button @click="structCode(demo.StructName.name, demo.name)">
             show client code "struct_{{ demo.StructName.name }}.ts"
           </button>
+
           <div v-for="id in demo.IDs" :key="id">
-            <button @click="Watch(demo.StructName.name, id)">
-              Watch("{{ demo.StructName.name }}:{{ id }}",{{
+            <button
+              :disabled="$store.state.IsInWatch(demo.StructName.name, id)"
+              @click="Watch(demo.StructName.name, id)"
+            >
+              player.Watch("{{ demo.StructName.name }}:{{ id }}",{{
                 demo.StructName.name
               }}Data);
             </button>
-            <button @click="WatchClose(demo.StructName.name, id)">
-              WatchClose("{{ demo.StructName.name }}:{{ id }}");
+            •
+            <button
+              :disabled="$store.state.IsNoWatch(demo.StructName.name, id)"
+              @click="WatchClose(demo.StructName.name, id)"
+            >
+              player.WatchClose("{{ demo.StructName.name }}:{{ id }}");
             </button>
           </div>
         </template>

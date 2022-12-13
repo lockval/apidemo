@@ -142,20 +142,25 @@
       comment: 
   IDs: [the001]
 
+
+
 - name: send A message to globalChat
   comment: |
     send A message to globalChat
   KeySubList:
     - name: mChatList
       comment: chat history here
-  StructName: 
-      name: globalChat
-      id: the001
-      comment: 
+      structName: globalChat
+      structID: the001
+    - name: mChatID
+      comment: who sent the message
+      structName: globalChat
+      structID: the001
   Call: 
-      name: testOtherQuery
+      name: testChat
       comment: 
-
+      params:
+        text: string
 
 
 

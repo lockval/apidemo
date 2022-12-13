@@ -11,7 +11,10 @@ return require("umd").define({
             "mList",
             "mListSlave",
         }
-
+        retval["globalChat"]={
+            "mChatList",
+            "mChatID",
+        }
 
 
         return retval

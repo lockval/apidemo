@@ -9,5 +9,9 @@ func Init() map[string]any {
 			"mList",
 			"mListSlave",
 		},
+		"globalChat:": []string{
+			"mChatList",
+			"mChatID",
+		},
 	}
 }

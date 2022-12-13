@@ -2,7 +2,7 @@
 
 let fs = require("fs");
 var Mustache = require("mustache");
-
+const { exit } = require("node:process");
 let demoList = JSON.parse(fs.readFileSync("./src/assets/client.json", "utf8"));
 
 let outputMain = fs.readFileSync("./public/client/player.temp.ts", "utf8");
@@ -30,43 +30,54 @@ let structView = {
 
 for (let demo of demoList) {
   if(demo.StructName){
-    if(!demo.Call){
-      structView.StructNameList.push( { name: demo.StructName.name } )
-      structView.StructName2view[demo.StructName.name]=new View();
-    }else{
-      if (demo.KeySubList) {
-        let KeySubObjs = structView.StructName2view[demo.StructName.name].KeySubObjs;
-        for (let KeySub of demo.KeySubList) {
+
+    structView.StructNameList.push( { name: demo.StructName.name } )
+    structView.StructName2view[demo.StructName.name]=new View();
+
+  }else{
+    if (demo.KeySubList) {
+      
+      for (let KeySub of demo.KeySubList) {
+
+        if(KeySub.structName){
+          
+          let KeySubObjs = structView.StructName2view[KeySub.structName].KeySubObjs;
+          if(!KeySubObjs){
+            console.log("Define StructName before observing");
+            exit(1)
+          }
           if (KeySubObjs[KeySub.name]) {
             KeySubObjs[KeySub.name].demoList.push({ name: demo.name });
           } else {
             KeySubObjs[KeySub.name] = {
               name: KeySub.name,
-              sName: demo.StructName.name+"_",
-              sID: demo.StructName.id+"_",
+              sName: KeySub.structName+"_",
+              sID: KeySub.structID+"_",
               comment: KeySub.comment,
               demoList: [{ name: demo.name }],
             };
           }
+
+        }else{
+
+          let KeySubObjs = view.KeySubObjs;
+
+          if (KeySubObjs[KeySub.name]) {
+            KeySubObjs[KeySub.name].demoList.push({ name: demo.name });
+          } else {
+            KeySubObjs[KeySub.name] = {
+              name: KeySub.name,
+              sName: "",
+              sID: "",
+              comment: KeySub.comment,
+              demoList: [{ name: demo.name }],
+            };
+          }
+
         }
-      }
-    }
-    
-  }else{
-    if (demo.KeySubList) {
-      let KeySubObjs = view.KeySubObjs;
-      for (let KeySub of demo.KeySubList) {
-        if (KeySubObjs[KeySub.name]) {
-          KeySubObjs[KeySub.name].demoList.push({ name: demo.name });
-        } else {
-          KeySubObjs[KeySub.name] = {
-            name: KeySub.name,
-            sName: "",
-            sID: "",
-            comment: KeySub.comment,
-            demoList: [{ name: demo.name }],
-          };
-        }
+
+
+        
       }
     }
   }
@@ -148,7 +159,13 @@ if(process.env.lockvalGwAddrs){
 let repl5 = Mustache.render(
   `{{#StructNameList}}
 import { {{name}}Data } from "./struct_{{name}}";
-{{/StructNameList}}`,
+{{/StructNameList}}
+export const structDict: Dict={
+  {{#StructNameList}}
+  {{name}}: {{name}}Data,
+  {{/StructNameList}}
+}
+`,
   structView
 );
 

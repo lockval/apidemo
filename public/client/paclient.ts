@@ -798,10 +798,9 @@ function _clearLocalData(bucket: string): void {
 
 type ResolveCallback = (value: any) => void;
 
-type notUndefined = string | number | boolean | symbol | object;
-export interface Dict<T extends notUndefined = notUndefined> {
-  [key: string]: T | undefined;
-}
+export type Dict<T = any> = {
+  [key: string | number | symbol]: T;
+};
 
 // Login verification, c->s
 // the structure and method that need to be implemented

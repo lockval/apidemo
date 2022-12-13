@@ -7,5 +7,9 @@ export function main() {
       "mList",
       "mListSlave",
     ],
+    "globalChat:": [
+      "mChatList",
+      "mChatID",
+    ],
   }
 }

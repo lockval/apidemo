@@ -3,8 +3,10 @@ return require("umd").define({
 }, function(exports)
 
     function exports.main(input)
-
-        return false
+        if input.WATCHUID=="globalChat:the001" then
+            return true  -- allow
+        end
+        return false -- not allow
     end
 
 end)

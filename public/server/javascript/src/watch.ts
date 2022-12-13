@@ -1,5 +1,8 @@
 import { Dict, DBOperate } from "./libs/lockvalserver"
 
 export function main(input: DBOperate<null>) {
-  return false
+  if(input.WATCHUID=="globalChat:the001"){
+    return true // allow
+  }
+  return false // not allow
 }

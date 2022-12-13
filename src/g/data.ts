@@ -10,9 +10,11 @@ class mystatus {
   newV: Dict = {};
 
   code: Dict = {};
+  watch: Dict = {};
 
   config: Dict = {
     clientCode: "",
+    jsonCode: "",
   };
 
   getHL(k: string): string {
@@ -22,6 +24,13 @@ class mystatus {
       v = "";
     }
     return v;
+  }
+
+  IsInWatch(StructName: string, id: string) {
+    return !!this.watch[StructName + ":" + id];
+  }
+  IsNoWatch(StructName: string, id: string) {
+    return !this.watch[StructName + ":" + id];
   }
 }
 
@@ -44,6 +53,12 @@ export const store = createStore({
     },
     setConfig(state: mystatus, o: any) {
       state.config[o.k] = o.v;
+    },
+    setWatch(state: mystatus, o: any) {
+      state.watch[o.k] = o.v;
+    },
+    disconnect(state: mystatus) {
+      state.watch = {};
     },
   },
   actions: {},
