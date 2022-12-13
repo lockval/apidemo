@@ -219,12 +219,15 @@ async function Call(name: string, types: any, demoname: string) {
     <p>This site is still under construction</p>
     <br /><br /><br />
 
-    guestname = <input @input="input" v-model="$store.state.config.guestname" /> //
-    refresh takes effect<br />
-    <button @click="clientCode()">show / hide client code</button><br />
-    <button @click="mainJSON()">show / hide main.json (config)</button><br />
+    <hr />
+    <br />
+    guestname =
+    <input @input="input" v-model="$store.state.config.guestname" /> // refresh
+    takes effect<br />
+    <button @click="clientCode()">show / hide player.ts</button><br />
+    <button @click="mainJSON()">show / hide main.json</button><br />
     <highlightjs language="typescript" :code="$store.state.config.clientCode" />
-
+    <br />
     <highlightjs
       language="typescript"
       code='import { Player } from "./player";
@@ -233,89 +236,97 @@ player.guestname = guestname;
 player.Open(null);
     '
     />
-    console.log(this.userData.UID);<br />
+    <br />
+    <highlightjs language="typescript" code="console.log(this.userData.UID);" />
+
     {{ $store.state.config.UID }}<br />
 
-    <br /><br /><br />Call
+    <br /><br /><br />
 
     <div v-for="demo in clientobj" :key="demo.name">
-      <li>{{ demo.name }}</li>
-      <v-md-preview :text="demo.comment"></v-md-preview>
-      <highlightjs autodetect :code="$store.state.getHL(demo.name)" />
-      <template v-if="demo.Call">
-        <button @click="jscode(demo.Call.name, demo.name)">JS</button> •
-        <button @click="gocode(demo.Call.name, demo.name)">Go</button> •
-        <button @click="luacode(demo.Call.name, demo.name)">Lua</button> •
-        <button @click="starcode(demo.Call.name, demo.name)">Starlark</button>
-        ---
-        <button @click="Call(demo.Call.name, demo.Call.params, demo.name)">
-          Call "{{ demo.Call.name }}"
-        </button>
-        {
-
-        <span v-for="(val, key) in demo.Call.params" :key="key">
-          {{ key }} {{ val }}<input :type="val" v-model="params[key]" />,
-        </span>
-        }
-
-        <div v-for="KeySub in demo.KeySubList" :key="KeySub.name">
-          <template v-if="demo.StructName">
-            KeySub: {{ demo.StructName.name }}:{{ demo.StructName.id }}
-            {{ KeySub.name }}
-          </template>
-          <template v-else> KeySub: {{ KeySub.name }} </template>
-
-          <table>
-            <tr>
-              <td>old( onchange_{{ KeySub.name }} .. let oldV .. )</td>
-              <td>change( onchange_{{ KeySub.name }} .. let chgV .. )</td>
-              <td>new( contextObject.ChangeName=="{{ KeySub.name }}" .. )</td>
-            </tr>
-            <tr>
-              <td>
-                <textarea
-                  readonly
-                  rows="10"
-                  cols="54"
-                  :value="GetoldV(demo, KeySub.name)"
-                ></textarea>
-              </td>
-              <td>
-                <textarea
-                  readonly
-                  rows="10"
-                  cols="54"
-                  :value="GetchgV(demo, KeySub.name)"
-                ></textarea>
-              </td>
-              <td>
-                <textarea
-                  readonly
-                  rows="10"
-                  cols="54"
-                  :value="GetnewV(demo, KeySub.name)"
-                ></textarea>
-              </td>
-            </tr>
-          </table>
-        </div>
-      </template>
-      <template v-else>
-        <button @click="structCode(demo.StructName.name, demo.name)">
-          show client code "struct_{{ demo.StructName.name }}.ts"
-        </button>
-        <div v-for="id in demo.IDs" :key="id">
-          <button @click="Watch(demo.StructName.name, id)">
-            Watch("{{ demo.StructName.name }}:{{ id }}",{{
-              demo.StructName.name
-            }}Data);
+      <hr />
+      <details>
+        <summary>
+          {{ demo.name }}
+        </summary>
+        <v-md-preview :text="demo.comment"></v-md-preview>
+        <highlightjs autodetect :code="$store.state.getHL(demo.name)" />
+        <template v-if="demo.Call">
+          <button @click="jscode(demo.Call.name, demo.name)">JS</button> •
+          <button @click="gocode(demo.Call.name, demo.name)">Go</button> •
+          <button @click="luacode(demo.Call.name, demo.name)">Lua</button> •
+          <button @click="starcode(demo.Call.name, demo.name)">Starlark</button>
+          ---
+          <button @click="Call(demo.Call.name, demo.Call.params, demo.name)">
+            Call "{{ demo.Call.name }}"
           </button>
-          <button @click="WatchClose(demo.StructName.name, id)">
-            WatchClose("{{ demo.StructName.name }}:{{ id }}");
+          {
+
+          <span v-for="(val, key) in demo.Call.params" :key="key">
+            {{ key }} {{ val }}<input :type="val" v-model="params[key]" />,
+          </span>
+          }
+
+          <div v-for="KeySub in demo.KeySubList" :key="KeySub.name">
+            <template v-if="demo.StructName">
+              KeySub: {{ demo.StructName.name }}:{{ demo.StructName.id }}
+              {{ KeySub.name }}
+            </template>
+            <template v-else> KeySub: {{ KeySub.name }} </template>
+
+            <table>
+              <tr>
+                <td>old( onchange_{{ KeySub.name }} .. let oldV .. )</td>
+                <td>change( onchange_{{ KeySub.name }} .. let chgV .. )</td>
+                <td>new( contextObject.ChangeName=="{{ KeySub.name }}" .. )</td>
+              </tr>
+              <tr>
+                <td>
+                  <textarea
+                    readonly
+                    rows="10"
+                    cols="54"
+                    :value="GetoldV(demo, KeySub.name)"
+                  ></textarea>
+                </td>
+                <td>
+                  <textarea
+                    readonly
+                    rows="10"
+                    cols="54"
+                    :value="GetchgV(demo, KeySub.name)"
+                  ></textarea>
+                </td>
+                <td>
+                  <textarea
+                    readonly
+                    rows="10"
+                    cols="54"
+                    :value="GetnewV(demo, KeySub.name)"
+                  ></textarea>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </template>
+        <template v-else>
+          <button @click="structCode(demo.StructName.name, demo.name)">
+            show client code "struct_{{ demo.StructName.name }}.ts"
           </button>
-        </div>
-      </template>
-      <br /><br /><br /><br />
+          <div v-for="id in demo.IDs" :key="id">
+            <button @click="Watch(demo.StructName.name, id)">
+              Watch("{{ demo.StructName.name }}:{{ id }}",{{
+                demo.StructName.name
+              }}Data);
+            </button>
+            <button @click="WatchClose(demo.StructName.name, id)">
+              WatchClose("{{ demo.StructName.name }}:{{ id }}");
+            </button>
+          </div>
+        </template>
+        <br /><br /><br />
+      </details>
+      <br /><br /><br />
     </div>
   </main>
 </template>
