@@ -379,7 +379,7 @@ export abstract class paclient extends Base {
       this.onclose(ce);
 
       return;
-    }, 3000); //Connect within 3 seconds and ping 5 times
+    }, 5000); //Connect within 5 seconds and ping 5 times
 
     const sgws = li.GwAddrs.split(",");
     for (const sgw of sgws) {
