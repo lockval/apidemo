@@ -20,7 +20,7 @@ npm run buildBothAndPreview
 - curl
 - Go (1.19)
 - Lua (>=5.1)
-- [starc2one](https://github.com/vanishs/starc2one#INSTALLATION)
+- [starc2one](https://github.com/lockval/starc2one#INSTALLATION)
 
 ## 2. Project Setup
 
