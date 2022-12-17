@@ -118,17 +118,26 @@ async function structCode(structName: string, demoname: string) {
 }
 
 // window.open("./server/javascript/src/usr/" + callname + ".ts");
-async function jscode(callname: string, demoname: string) {
-  updateCodeTitle(demoname, "./server/javascript/src/usr/" + callname + ".ts");
+async function jscode(name: string, callname: string, demoname: string) {
+  updateCodeTitle(
+    demoname,
+    "./server/javascript/src/" + name + "/" + callname + ".ts"
+  );
 }
-async function gocode(callname: string, demoname: string) {
-  updateCodeTitle(demoname, "./server/go/src/usr/" + callname + ".go");
+async function gocode(name: string, callname: string, demoname: string) {
+  updateCodeTitle(demoname, "./server/go/src/" + name + "/" + callname + ".go");
 }
-async function luacode(callname: string, demoname: string) {
-  updateCodeTitle(demoname, "./server/lua/src/usr/" + callname + ".lua");
+async function luacode(name: string, callname: string, demoname: string) {
+  updateCodeTitle(
+    demoname,
+    "./server/lua/src/" + name + "/" + callname + ".lua"
+  );
 }
-async function starcode(callname: string, demoname: string) {
-  updateCodeTitle(demoname, "./server/starlark/src/usr/" + callname + ".star");
+async function starcode(name: string, callname: string, demoname: string) {
+  updateCodeTitle(
+    demoname,
+    "./server/starlark/src/" + name + "/" + callname + ".star"
+  );
 }
 
 async function jswatch(name: string, demoname: string) {
@@ -284,10 +293,17 @@ player.Open(null);
         <div>{{ $store.state.getTitle(demo.name) }}</div>
         <highlightjs autodetect :code="$store.state.getHL(demo.name)" />
         <template v-if="demo.Call">
-          <button @click="jscode(demo.Call.name, demo.name)">JS</button> •
-          <button @click="gocode(demo.Call.name, demo.name)">Go</button> •
-          <button @click="luacode(demo.Call.name, demo.name)">Lua</button> •
-          <button @click="starcode(demo.Call.name, demo.name)">Starlark</button>
+          <button @click="jscode('usr', demo.Call.name, demo.name)">JS</button>
+          •
+          <button @click="gocode('usr', demo.Call.name, demo.name)">Go</button>
+          •
+          <button @click="luacode('usr', demo.Call.name, demo.name)">
+            Lua
+          </button>
+          •
+          <button @click="starcode('usr', demo.Call.name, demo.name)">
+            Starlark
+          </button>
           ---
           <button @click="Call(demo.Call.name, demo.Call.params, demo.name)">
             player.Call("{{ demo.Call.name }}",obj)
@@ -341,7 +357,7 @@ player.Open(null);
             </table>
           </div>
         </template>
-        <template v-else>
+        <template v-else-if="demo.StructName">
           <button @click="jswatch('watch', demo.name)">JS(watch)</button> •
           <button @click="jswatch('init', demo.name)">JS(init)</button> •
           <button @click="gowatch('watch', demo.name)">Go(watch)</button> •
@@ -373,6 +389,56 @@ player.Open(null);
             >
               player.WatchClose("{{ demo.StructName.name }}:{{ id }}");
             </button>
+          </div>
+        </template>
+        <template v-else-if="demo.sys">
+          <button @click="jscode('sys', demo.sys.name, demo.name)">JS</button> •
+          <button @click="gocode('sys', demo.sys.name, demo.name)">Go</button> •
+          <button @click="luacode('sys', demo.sys.name, demo.name)">Lua</button>
+          •
+          <button @click="starcode('sys', demo.sys.name, demo.name)">
+            Starlark
+          </button>
+
+          <div v-for="KeySub in demo.KeySubList" :key="KeySub.name">
+            <template v-if="structName(KeySub)">
+              {{ structNameID(KeySub) }} KeySub: {{ KeySub.name }}
+            </template>
+            <template v-else> KeySub: {{ KeySub.name }} </template>
+
+            <table>
+              <tr>
+                <td>old( onchange_{{ KeySub.name }} .. let oldV .. )</td>
+                <td>change( onchange_{{ KeySub.name }} .. let chgV .. )</td>
+                <td>new( contextObject.ChangeName=="{{ KeySub.name }}" .. )</td>
+              </tr>
+              <tr>
+                <td>
+                  <textarea
+                    readonly
+                    rows="10"
+                    cols="54"
+                    :value="GetoldV(KeySub)"
+                  ></textarea>
+                </td>
+                <td>
+                  <textarea
+                    readonly
+                    rows="10"
+                    cols="54"
+                    :value="GetchgV(KeySub)"
+                  ></textarea>
+                </td>
+                <td>
+                  <textarea
+                    readonly
+                    rows="10"
+                    cols="54"
+                    :value="GetnewV(KeySub)"
+                  ></textarea>
+                </td>
+              </tr>
+            </table>
           </div>
         </template>
         <br /><br /><br />

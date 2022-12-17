@@ -35,12 +35,12 @@ npm install
 
 ## 3. Download and start your services (Execute start.sh or start.bat)
 
-- [Linux amd64(X86)](https://downloads.lockval.com/v0.0.13.amd64.linux.zip)
-- [Linux arm64](https://downloads.lockval.com/v0.0.13.arm64.linux.zip)
-- [macOS amd64(X86)](https://downloads.lockval.com/v0.0.13.amd64.darwin.zip)
-- [macOS arm64](https://downloads.lockval.com/v0.0.13.arm64.darwin.zip)
-- [Windows amd64(X86)](https://downloads.lockval.com/v0.0.13.amd64.windows.zip)
-- [Windows arm64](https://downloads.lockval.com/v0.0.13.arm64.windows.zip)
+- [Linux amd64(X86)](https://downloads.lockval.com/v0.0.14.amd64.linux.zip)
+- [Linux arm64](https://downloads.lockval.com/v0.0.14.arm64.linux.zip)
+- [macOS amd64(X86)](https://downloads.lockval.com/v0.0.14.amd64.darwin.zip)
+- [macOS arm64](https://downloads.lockval.com/v0.0.14.arm64.darwin.zip)
+- [Windows amd64(X86)](https://downloads.lockval.com/v0.0.14.amd64.windows.zip)
+- [Windows arm64](https://downloads.lockval.com/v0.0.14.arm64.windows.zip)
 
 
 

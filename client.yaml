@@ -155,6 +155,8 @@
 
 - name: send A message to globalChat
   comment: |
+    Please click Watch in the example above before Call
+
     Add data to globalChat:the001. This way users watching globalChat:the001 will see the changes
   KeySubList:
     - name: mChatList
@@ -171,6 +173,30 @@
       params:
         text: string
 
+
+
+- name: Delayed execution of calling code
+  comment: |
+    Execute "sys/testItsTime" after setting 3 seconds
+    keywords: **Sleep**
+    Please pay attention to the data changes in the example below
+  KeySubList: []
+  Call: 
+      name: testSleep
+      comment: 
+
+
+
+- name: Delayed execution entity code
+  comment: |
+    do something when it's time
+    Here's the Sleep call from the example above
+  KeySubList:
+    - name: mBase
+      comment: Count is a counter
+  sys: 
+      name: testItsTime
+      comment: 
 
 
 
