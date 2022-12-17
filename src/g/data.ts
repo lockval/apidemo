@@ -10,6 +10,7 @@ class mystatus {
   newV: Dict = {};
 
   code: Dict = {};
+  title: Dict = {};
   watch: Dict = {};
 
   config: Dict = {
@@ -19,6 +20,14 @@ class mystatus {
 
   getHL(k: string): string {
     let v = this.code[k];
+
+    if (!v) {
+      v = "";
+    }
+    return v;
+  }
+  getTitle(k: string): string {
+    let v = this.title[k];
 
     if (!v) {
       v = "";
@@ -50,6 +59,9 @@ export const store = createStore({
     },
     setCode(state: mystatus, o: any) {
       state.code[o.k] = o.v;
+    },
+    setTitle(state: mystatus, o: any) {
+      state.title[o.k] = o.v;
     },
     setConfig(state: mystatus, o: any) {
       state.config[o.k] = o.v;

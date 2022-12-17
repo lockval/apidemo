@@ -104,53 +104,44 @@ function WatchClose(StructName: string, id: string) {
   store.commit("setWatch", { k: StructName + ":" + id, v: false });
 }
 
-async function structCode(structName: string, demoname: string) {
-  fetch("./client/struct_" + structName + ".ts")
+function updateCodeTitle(demoname: string, path: string) {
+  fetch(path)
     .then((resp) => resp.text())
-    .then((data) => store.commit("setCode", { k: demoname, v: data }));
+    .then((data) => {
+      store.commit("setCode", { k: demoname, v: data });
+      store.commit("setTitle", { k: demoname, v: path });
+    });
+}
+
+async function structCode(structName: string, demoname: string) {
+  updateCodeTitle(demoname, "./client/struct_" + structName + ".ts");
 }
 
 // window.open("./server/javascript/src/usr/" + callname + ".ts");
 async function jscode(callname: string, demoname: string) {
-  fetch("./server/javascript/src/usr/" + callname + ".ts")
-    .then((resp) => resp.text())
-    .then((data) => store.commit("setCode", { k: demoname, v: data }));
+  updateCodeTitle(demoname, "./server/javascript/src/usr/" + callname + ".ts");
 }
 async function gocode(callname: string, demoname: string) {
-  fetch("./server/go/src/usr/" + callname + ".go")
-    .then((resp) => resp.text())
-    .then((data) => store.commit("setCode", { k: demoname, v: data }));
+  updateCodeTitle(demoname, "./server/go/src/usr/" + callname + ".go");
 }
 async function luacode(callname: string, demoname: string) {
-  fetch("./server/lua/src/usr/" + callname + ".lua")
-    .then((resp) => resp.text())
-    .then((data) => store.commit("setCode", { k: demoname, v: data }));
+  updateCodeTitle(demoname, "./server/lua/src/usr/" + callname + ".lua");
 }
 async function starcode(callname: string, demoname: string) {
-  fetch("./server/starlark/src/usr/" + callname + ".star")
-    .then((resp) => resp.text())
-    .then((data) => store.commit("setCode", { k: demoname, v: data }));
+  updateCodeTitle(demoname, "./server/starlark/src/usr/" + callname + ".star");
 }
 
-async function jswatch(demoname: string) {
-  fetch("./server/javascript/src/watch.ts")
-    .then((resp) => resp.text())
-    .then((data) => store.commit("setCode", { k: demoname, v: data }));
+async function jswatch(name: string, demoname: string) {
+  updateCodeTitle(demoname, `./server/javascript/src/${name}.ts`);
 }
-async function gowatch(demoname: string) {
-  fetch("./server/go/src/watch.go")
-    .then((resp) => resp.text())
-    .then((data) => store.commit("setCode", { k: demoname, v: data }));
+async function gowatch(name: string, demoname: string) {
+  updateCodeTitle(demoname, `./server/go/src/${name}.go`);
 }
-async function luawatch(demoname: string) {
-  fetch("./server/lua/src/watch.lua")
-    .then((resp) => resp.text())
-    .then((data) => store.commit("setCode", { k: demoname, v: data }));
+async function luawatch(name: string, demoname: string) {
+  updateCodeTitle(demoname, `./server/lua/src/${name}.lua`);
 }
-async function starwatch(demoname: string) {
-  fetch("./server/starlark/src/watch.star")
-    .then((resp) => resp.text())
-    .then((data) => store.commit("setCode", { k: demoname, v: data }));
+async function starwatch(name: string, demoname: string) {
+  updateCodeTitle(demoname, `./server/starlark/src/${name}.star`);
 }
 
 function GetoldV(KeySub: any) {
@@ -185,6 +176,7 @@ function GetnewV(KeySub: any) {
 
 async function Call(name: string, types: any, demoname: string) {
   store.commit("setCode", { k: demoname, v: "" });
+  store.commit("setTitle", { k: demoname, v: "" });
 
   if (types === undefined) {
     types = {};
@@ -289,6 +281,7 @@ player.Open(null);
           {{ demo.name }}
         </summary>
         <v-md-preview :text="demo.comment"></v-md-preview>
+        <div>{{ $store.state.getTitle(demo.name) }}</div>
         <highlightjs autodetect :code="$store.state.getHL(demo.name)" />
         <template v-if="demo.Call">
           <button @click="jscode(demo.Call.name, demo.name)">JS</button> •
@@ -299,10 +292,11 @@ player.Open(null);
           <button @click="Call(demo.Call.name, demo.Call.params, demo.name)">
             player.Call("{{ demo.Call.name }}",obj)
           </button>
-          {
+          obj:{
 
           <span v-for="(val, key) in demo.Call.params" :key="key">
-            {{ key }} {{ val }}<input :type="val" v-model="params[key]" />,
+            {{ key }}: {{ val }},
+            <input size="6" :type="val" v-model="params[key]" />&nbsp;
           </span>
           }
 
@@ -348,13 +342,19 @@ player.Open(null);
           </div>
         </template>
         <template v-else>
-          <button @click="jswatch(demo.name)">JS</button> •
-          <button @click="gowatch(demo.name)">Go</button> •
-          <button @click="luawatch(demo.name)">Lua</button> •
-          <button @click="starwatch(demo.name)">Starlark</button>
+          <button @click="jswatch('watch', demo.name)">JS(watch)</button> •
+          <button @click="jswatch('init', demo.name)">JS(init)</button> •
+          <button @click="gowatch('watch', demo.name)">Go(watch)</button> •
+          <button @click="gowatch('init', demo.name)">Go(init)</button> •
+          <button @click="luawatch('watch', demo.name)">Lua(watch)</button> •
+          <button @click="luawatch('init', demo.name)">Lua(init)</button> •
+          <button @click="starwatch('watch', demo.name)">
+            Starlark(watch)
+          </button>
+          <button @click="starwatch('init', demo.name)">Starlark(init)</button>
           ---
           <button @click="structCode(demo.StructName.name, demo.name)">
-            show client code "struct_{{ demo.StructName.name }}.ts"
+            show CLIENT code
           </button>
 
           <div v-for="id in demo.IDs" :key="id">
