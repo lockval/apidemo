@@ -17,13 +17,13 @@ func (e export) Export_testChat(input *go2plugin.Input) map[string]any {
 		"globalChat:the001",
 		"mChatList",
 		"1", text,
-	).List(20).Link("mChatID") //limit 20 and link mChatID
+	).List(10).Link("mChatID") //limit 10 and link mChatID
 
 	input.PutSubVal(
 		"globalChat:the001",
 		"mChatID",
 		"1", input.UID, //record my id
-	).List(20) //limit 20
+	).List(10) //limit 10
 
 	input.PutAndUnlock()
 
