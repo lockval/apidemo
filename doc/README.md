@@ -14,46 +14,46 @@ npm run buildBothAndPreview
 ```
 -->
 
-## 1. Use [Dev Container](https://code.visualstudio.com/docs/devcontainers/containers) to open project in vscode
+## 1. prepare some tools
+- Git
+- Node.js
+- curl
+- Go (1.19)
+- Lua (>=5.1)
+- [starc2one](https://github.com/lockval/starc2one#INSTALLATION)
 
-You may need these tools:
+## 2. Project Setup
 
-- Visual Studio Code
-- Docker Desktop
-
-Follow the steps to open the project:
-  1. Open this project in vscode
-  2. Click ![Open a Remote Window](./imgs/orw.jpg) in the lower left corner
-  3. Click "Reopen in Container"
-
-If successful you will see ![Dev Container: apidemo](./imgs/devc.jpg) in the lower left corner
+Clone this project code, and execute the following code in the project directory.
 
 
 
-## 2. start your services
-in vscode TERMINAL:
 ```sh
-cd ~/dist
-./start.sh
-```
-
-
-## 3. Client Project Setup
-in vscode TERMINAL:
-```sh
-cd /workspaces/apidemo/
 npm install
 ```
 
 
+## 3. Download and start your services (Execute start.sh or start.bat)
+
+- [Linux amd64(X86)](https://downloads.lockval.com/v0.0.14.amd64.linux.zip)
+- [Linux arm64](https://downloads.lockval.com/v0.0.14.arm64.linux.zip)
+- [macOS amd64(X86)](https://downloads.lockval.com/v0.0.14.amd64.darwin.zip)
+- [macOS arm64](https://downloads.lockval.com/v0.0.14.arm64.darwin.zip)
+- [Windows amd64(X86)](https://downloads.lockval.com/v0.0.14.amd64.windows.zip)
+- [Windows arm64](https://downloads.lockval.com/v0.0.14.arm64.windows.zip)
+
+
+
+
 ## 4. Build Client And Preview
-in vscode TERMINAL:
-```sh
-npm run buildClientAndPreview
-```
+1. edit client.yaml
+2. run:
+    ```sh
+    npm run buildClientAndPreview
+    ```
 
 ## 4. Build Server And Upload (Choose a language you want to use)
-Click + in vscode to Create a New Terminal. and:
+
 
 - JS
   #### edit public/server/javascript/... and run:
