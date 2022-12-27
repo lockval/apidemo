@@ -1,0 +1,4 @@
+{
+    "name": "apidemo",
+    "dockerFile": "Dockerfile"
+}
