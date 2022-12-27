@@ -46,14 +46,7 @@ npm install
 ```
 
 
-## 4. Build Client And Preview
-in vscode TERMINAL:
-```sh
-npm run buildClientAndPreview
-```
-
 ## 4. Build Server And Upload (Choose a language you want to use)
-Click + in vscode to Create a New Terminal. and:
 
 - JS
   #### edit public/server/javascript/... and run:
@@ -79,6 +72,13 @@ Click + in vscode to Create a New Terminal. and:
     ./serverGoBuildAndUpload.sh
     ```
 
+
+## 4. Build Client And Preview
+in vscode TERMINAL:
+```sh
+npm run buildClientAndPreview
+```
+Click "Open in Browser" to open website
 
 ## Client Code:
 - public/client/paclient.ts (core code)

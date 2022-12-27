@@ -200,3 +200,11 @@
 
 
 
+- name: Use api.so for more functionality
+  comment: |
+    Generate api.so files by writing plug-ins to support more functions for server-side script codes
+    This G.Sum function can click [here](https://github.com/lockval/api.so) to view the source code
+  KeySubList: []
+  Call: 
+      name: testG
+      comment: 

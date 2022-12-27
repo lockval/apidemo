@@ -57,6 +57,8 @@ func initFunc(*go2plugin.Input) map[string]any {
 	globalThis.Rand.Uint32 = helper.Any2Func[func() uint32](Import["Rand"], "Uint32")
 	globalThis.Rand.Uint64 = helper.Any2Func[func() uint64](Import["Rand"], "Uint64")
 
+	globalThis.G = Import["G"]
+
 	globalThis.ExcelConfig = Import["ExcelConfig"]
 
 	return src.Init()
