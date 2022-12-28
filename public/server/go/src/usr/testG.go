@@ -10,7 +10,7 @@ import (
 func (e export) Export_testG(input *go2plugin.Input) map[string]any {
 
 	// TODO conv to struct and get func Sum
-	_ = globalThis.G
-
-	return helper.RespEmpty
+	Sum := helper.Any2Func[func(string, string) string](globalThis.G, "Sum")
+	c := Sum("a", "gg")
+	return map[string]any{"c": c}
 }

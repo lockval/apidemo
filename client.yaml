@@ -208,3 +208,13 @@
   Call: 
       name: testG
       comment: 
+
+
+- name: get link
+  comment:  |
+    Associate other KeySub when getting data
+    keywords: **Link(**
+  KeySubList: []
+  Call: 
+      name: testGetLink
+      comment: 
