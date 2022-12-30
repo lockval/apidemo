@@ -224,7 +224,7 @@ async function Call(name: string, types: any, demoname: string) {
     </p>
     <br />
     <p>
-      locKVal is a distributed key-value service engine that can run scripts.
+      Lockval Engine is a distributed backend key-value engine that can run scripts.
     </p>
     <p>
       You can
@@ -242,11 +242,11 @@ async function Call(name: string, types: any, demoname: string) {
       and will gradually provide support for more environments in the future
     </p>
     <br />
-    <p>You can learn how to build your app with locKVal here.</p>
+    <p>You can learn how to build your app with Lockval Engine here.</p>
     <p>
       This site(<a href="https://github.com/lockval/apidemo" target="_blank"
         >source</a
-      >) is built using locKVal itself
+      >) is built using Lockval Engine itself
     </p>
     <p>This site is still under construction</p>
     <br /><br /><br />
