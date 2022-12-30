@@ -216,11 +216,11 @@ async function Call(name: string, types: any, demoname: string) {
 
   <main>
     <p>
-      <span>welcome to </span>
-      <span style="font-size: 40px" class="blue">loc</span>
+      <span>welcome to Lockval Engine</span>
+      <!-- <span style="font-size: 40px" class="blue">loc</span>
       <span style="font-size: 40px" class="red">K</span>
       <span style="font-size: 40px" class="green">V</span>
-      <span style="font-size: 40px" class="blue">al</span>
+      <span style="font-size: 40px" class="blue">al</span> -->
     </p>
     <br />
     <p>
