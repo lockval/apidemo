@@ -1,3 +1,3 @@
 package globalThis
 
-var ExcelConfig any
+var JSON any
