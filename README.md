@@ -28,7 +28,7 @@ Follow the steps to open the project:
 
 If successful you will see ![Dev Container: apidemo](./imgs/devc.jpg) in the lower left corner
 
-
+[Build a Linux development environment (not recommended)](https://github.com/lockval/apidemo/blob/main/doc/devenv.md)
 
 ## 2. start your services
 in vscode TERMINAL:
