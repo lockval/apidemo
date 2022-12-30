@@ -24,7 +24,7 @@ function execCmd(cmd){
 let url=""
 let cmd=""
 
-// upload main.json (JSON)
+// upload main.json (JSONFILE)
 url = "https://" + mydomain + "/main.json?pwd=" + password
 cmd = "curl --insecure -X POST --data-binary @public/main.json" + " " + url
 execCmd(cmd)

@@ -35,7 +35,7 @@ func init() {
 
 func initFunc(*go2plugin.Input) map[string]any {
 
-	globalThis.JSON = Import["JSON"]
+	globalThis.JSONFILE = Import["JSONFILE"]
 
 	globalThis.Builtin.MakeKSUID = helper.Any2Func[func() string](Import["Builtin"], "MakeKSUID")
 	globalThis.Builtin.MapKeys = helper.Any2Func[func(m any, f func(k any))](Import["Builtin"], "MapKeys")
@@ -59,7 +59,7 @@ func initFunc(*go2plugin.Input) map[string]any {
 
 	globalThis.G = Import["G"]
 
-	globalThis.JSON = Import["JSON"]
+	globalThis.JSONFILE = Import["JSONFILE"]
 
 	return src.Init()
 }

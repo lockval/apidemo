@@ -1,3 +1,3 @@
 package globalThis
 
-var JSON any
+var JSONFILE any

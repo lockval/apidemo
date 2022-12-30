@@ -9,10 +9,10 @@ import (
 
 func (e export) Export_testRequResp(input *go2plugin.Input) map[string]any {
 
-	stringAny := helper.Any2type[map[string]any](globalThis.JSON)["string"]
+	stringAny := helper.Any2type[map[string]any](globalThis.JSONFILE)["string"]
 	config1 := helper.Any2type[string](stringAny)
 
-	numberAny := helper.Any2type[map[string]any](globalThis.JSON)["number"]
+	numberAny := helper.Any2type[map[string]any](globalThis.JSONFILE)["number"]
 	config2 := helper.Any2type[float64](numberAny)
 
 	return map[string]any{
