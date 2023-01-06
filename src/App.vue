@@ -224,7 +224,8 @@ async function Call(name: string, types: any, demoname: string) {
     </p>
     <br />
     <p>
-      Lockval Engine is a distributed backend key-value engine that can run scripts.
+      Lockval Engine is a distributed backend key-value engine that can run
+      scripts.
     </p>
     <p>
       You can

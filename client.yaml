@@ -219,3 +219,39 @@
   Call: 
       name: testGetLink
       comment: 
+
+
+
+- name: Get user data before GetAndLock
+  comment: |
+    In lockval, the data in each user call is ACID.
+
+    This means that there can only be one GetAndLock call per call to guarantee ACID.
+
+    So how to solve the dynamic acquisition of user data through the current user data in GetAndLock?
+
+    The method is to notify the front-end engine to upload the specified fields of the current user according to a specific call name. When the backend engine calls GetAndLock, it will check whether these fields are consistent with the current user field data. If not, GetAndLock will return a UserError=-1 to indicate that the data is out of sync
+
+    1. The call name use the "-" symbol to express a group of primarykey_subkey requests
+
+    For example: when you want to get the subkey "Count" in the primary key "mBase" before GetAndLock
+    Then the call name is written as: testKeysCount-mBase_Count (of course testKeysCount can be written as other names)
+
+    2. In addition, lockval also supports reading the value of a parameter (must be of string type) in the request as the key of the subkey.
+
+    For example: you want to use the value of your parameter "param1" as a subkey, and "mList" as a primary key. Then the call name is written as: testKeysCount--mList_param1_ (of course testKeysCount can be written as other names, note that there is a "_" at the end, don't miss it)
+
+    If you have requirement 1 and requirement 2, then your calling name should be: testKeysCount-mBase_Count-mList_param1_
+
+    The current example will record the value of mBase.Count as the number of subkey in mDict, and if param1="a", then it will also record the value of mList.a as the number of subkey in mDict
+
+  KeySubList:
+    - name: mBase
+      comment: Count is a counter
+    - name: mList
+      comment: list mode
+    - name: mDict
+      comment: dict(map) mode
+  Call: 
+      name: testKeysCount-mBase_Count-mList_param1_
+      comment: 

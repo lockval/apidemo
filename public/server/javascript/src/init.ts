@@ -6,6 +6,7 @@ export function main() {
       "mBase",
       "mList",
       "mListSlave",
+      "mDict",
     ],
     "globalChat:": [
       "mChatList",

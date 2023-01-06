@@ -8,6 +8,7 @@ func Init() map[string]any {
 			"mBase",
 			"mList",
 			"mListSlave",
+			"mDict",
 		},
 		"globalChat:": []string{
 			"mChatList",

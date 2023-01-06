@@ -10,6 +10,7 @@ return require("umd").define({
             "mBase",
             "mList",
             "mListSlave",
+            "mDict",
         }
         retval["globalChat"]={
             "mChatList",
