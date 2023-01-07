@@ -41,6 +41,10 @@ onMounted(() => {
   });
   eventTarget.addEventListener("OnDisconnect", (e: any) => {
     console.log("OnDisconnect", e.detail);
+    store.commit("setConfig", {
+      k: "UID",
+      v: "After successful login, this text will be replaced by UID",
+    });
     store.commit("disconnect");
   });
   eventTarget.addEventListener("postOldAndChg", (e: any) => {
@@ -274,7 +278,8 @@ player.Open(null);
     <br />
     In player.ts you can check your UID<br />
     <highlightjs language="typescript" code="console.log(this.userData.UID);" />
-    {{ $store.state.config.UID }}<br /><br /><br />
+    <div class="blinking">{{ $store.state.config.UID }}</div>
+    <br /><br /><br />
 
     <hr />
     <details>

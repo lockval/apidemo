@@ -16,6 +16,7 @@ class mystatus {
   config: Dict = {
     clientCode: "",
     jsonCode: "",
+    UID: "After successful login, this text will be replaced by UID",
   };
 
   getHL(k: string): string {
