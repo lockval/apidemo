@@ -13,7 +13,7 @@ GoPluginMagicModule="GoPluginMagicModule"$(date +%s)
 find . -name '*.go' | xargs perl -pi -e "s|GoPluginMagicModule|${GoPluginMagicModule}|g"
 find . -name 'go.mod' | xargs perl -pi -e "s|GoPluginMagicModule|${GoPluginMagicModule}|g"
 
-go build -trimpath -buildmode=plugin -o dist/main.elf ./main && \
+go build -trimpath -buildmode=plugin -o ../../../dist/main.elf ./main && \
 
 
 find . -name 'go.mod' | xargs perl -pi -e "s|${GoPluginMagicModule}|GoPluginMagicModule|g"
