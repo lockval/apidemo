@@ -30,20 +30,23 @@ If successful you will see ![Dev Container: apidemo](./imgs/devc.jpg) in the low
 
 [Build a Linux development environment (not recommended)](https://github.com/lockval/apidemo/blob/main/doc/devenv.md)
 
-## 2. start your services
-in vscode TERMINAL:
-```sh
-cd ~/dist
-./start.sh
-```
 
 
-## 3. Client Project Setup
+## 2. Client Project Setup
 in vscode TERMINAL:
 ```sh
 cd /workspaces/apidemo/
 npm install
 ```
+
+
+
+## 3. start your services
+in vscode TERMINAL:
+```sh
+./startServer.sh
+```
+
 
 
 ## 4. Build Server And Upload (Choose a language you want to use)
@@ -66,17 +69,17 @@ npm install
     npm run serverStarBuildAndUpload
     ```
 
-- Go (Only run on macOS and Linux)
+- Go
   #### edit public/server/go/... and run:
     ```sh
-    ./serverGoBuildAndUpload.sh
+    npm run serverGoBuildAndUpload
     ```
 
 
 ## 4. Build Client And Preview
 in vscode TERMINAL:
 ```sh
-npm run buildClientAndPreview
+npm run clientBuildAndPreview
 ```
 Click "Open in Browser" to open website
 

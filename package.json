@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "build": "run-p serverJsBuildAndUpload clientBuild",
-    "buildBothAndPreview": "run-s lint build vitePreview",
-    "buildClientAndPreview": "run-s lint clientBuild vitePreview",
+    "clientBuildAndPreview": "run-s lint clientBuild vitePreview",
 
     "dev": "vite",
     "viteBuild": "vite build",
@@ -29,7 +28,11 @@
 
     "serverUploadLua": "node ./updatefile.js dist/main.lua",
     "serverGenLua": "cd public/server/lua && node ./build.js",
-    "serverLuaBuildAndUpload": "run-s serverGenLua serverUploadLua"
+    "serverLuaBuildAndUpload": "run-s serverGenLua serverUploadLua",
+
+    "serverUploadGo": "node ./updatefile.js dist/main.elf",
+    "serverGenGo": "cd public/server/go && ./build.sh",
+    "serverGoBuildAndUpload": "run-s serverGenGo serverUploadGo"
   },
   "dependencies": {
     "@highlightjs/vue-plugin": "^2.1.0",

@@ -7,7 +7,7 @@
       - npm run serverJsBuildAndUpload
       - npm run serverLuaBuildAndUpload
       - npm run serverStarBuildAndUpload
-      - ./serverGoBuildAndUpload.sh
+      - npm run serverGoBuildAndUpload
     
     The above script will first upload main.json and then upload the server script
     **Please note**: If you want the JSONFILE file to take effect, you must change the server code.
@@ -255,3 +255,5 @@
   Call: 
       name: testKeysCount-mBase_Count-mList_param1_
       comment: 
+      params:
+        param1: string

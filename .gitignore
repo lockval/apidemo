@@ -40,3 +40,5 @@ public/server/go/go.sum
 
 # other
 go.work.sum
+*.zip
+*.zip.*
