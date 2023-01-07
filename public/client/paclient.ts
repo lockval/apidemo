@@ -50,7 +50,7 @@ export abstract class UserDataBase {
       requ["Cookie_" + cmdAndCookies[i]] = vv;
     }
 
-    return <Promise<ApiResp<T>>>this.owner?.Call(apiname, requ);
+    return <Promise<ApiResp<T>>>this.owner?._call(apiname, requ);
   }
 }
 
@@ -650,7 +650,7 @@ export abstract class paclient extends Base {
     return sub;
   }
 
-  public async Call(cmd: string, body: Object) {
+  public async _call(cmd: string, body: Object) {
     return await this.rpc("Call", { Cmd: cmd, Body: body });
 
     // // You can handle errors here, not at the call

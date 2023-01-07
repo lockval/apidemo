@@ -202,7 +202,7 @@ async function Call(name: string, types: any, demoname: string) {
   }
   // console.log(params);
 
-  let resp = await player.Call(name, params);
+  let resp = await player.userData.Call(name, params);
   store.commit("setCode", { k: demoname, v: JSON.stringify(resp, null, 4) });
 }
 </script>
@@ -307,7 +307,7 @@ player.Open(null);
           </button>
           ---
           <button @click="Call(demo.Call.name, demo.Call.params, demo.name)">
-            player.Call("{{ demo.Call.name }}",obj)
+            player.userData.Call("{{ demo.Call.name }}",obj)
           </button>
           obj:{
 
