@@ -23,7 +23,8 @@ func init() {
 		mt := t.Method(i)
 		f, ok := v.Method(i).Interface().(func(*go2plugin.Input) map[string]any)
 		if ok && strings.HasPrefix(mt.Name, "Export_") {
-			Export.m["usr/"+mt.Name[7:]] = f
+			callName := strings.ReplaceAll(mt.Name[7:], "__", "-")
+			Export.m["usr/"+callName] = f
 		}
 	}
 }

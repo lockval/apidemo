@@ -245,6 +245,10 @@
 
     The current example will record the value of mBase.Count as the number of subkey in mDict, and if param1="a", then it will also record the value of mList.a as the number of subkey in mDict
 
+    ***Note***: param1 fills in a subkey in mList, for example: ***0000000000000000000001***
+
+    ***Note***: "func (e export) Export_***...***" in ***Go*** Script use ***__*** instead of ***-***
+
   KeySubList:
     - name: mBase
       comment: Count is a counter
