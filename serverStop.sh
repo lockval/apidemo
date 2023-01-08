@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-if [ -f service/dist/stop.sh ]
+if [ -f svrBin/dist/stop.sh ]
 then
-    service/dist/stop.sh $1
+    svrBin/dist/stop.sh $1
 fi
