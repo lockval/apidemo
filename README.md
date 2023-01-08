@@ -44,7 +44,7 @@ npm install
 ## 3. start your services
 in vscode TERMINAL:
 ```sh
-./startServer.sh
+./serverStart.sh
 ```
 
 
