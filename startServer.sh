@@ -1,8 +1,6 @@
 #!/bin/bash
 
 
-./stopServer.sh
-
 if [ ! -f latest.amd64.linux.zip ]
 then
     echo "latest.amd64.linux.zip does not exist, download and unzip it..."
@@ -11,5 +9,5 @@ then
 fi
 
 cd service/dist
-./start.sh
+./start.sh $1
 cd ../..
