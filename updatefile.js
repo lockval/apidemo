@@ -29,7 +29,7 @@ url = "https://" + mydomain + "/main.json?pwd=" + password
 cmd = "curl --insecure -X POST --data-binary @public/main.json" + " " + url
 execCmd(cmd)
 
-// upload server
+// upload server script
 url = "https://" + mydomain + "/main?pwd=" + password
 cmd = "curl --insecure -X POST --data-binary @" + process.argv[2] + " " + url
 execCmd(cmd)

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This script can help you compile server code and upload it to your own server
+# This script can help you compile go server script
 
 if [[ $(go env GOVERSION) != go1.19.4 ]]; then
     echo fail

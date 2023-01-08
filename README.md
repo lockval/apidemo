@@ -40,7 +40,7 @@ npm install
 
 
 
-## 3. start your services
+## 3. Server Start
 in vscode TERMINAL:
 ```sh
 ./serverStart.sh
@@ -48,7 +48,7 @@ in vscode TERMINAL:
 
 
 
-## 4. Build Server And Upload (Choose a language you want to use)
+## 4. Build ServerScript And Upload (Choose a language you want to use)
 
 - JS
   #### edit public/server/javascript/... and run:

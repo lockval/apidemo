@@ -23,7 +23,7 @@ npm install
 ```
 
 
-## 3. Download and start your services (Execute start.sh)
+## 3. Download and start your server (Execute start.sh)
 
 - [amd64(X86)](https://downloads.lockval.com/latest.amd64.linux.zip)
 - [arm64(AArch64)](https://downloads.lockval.com/latest.arm64.linux.zip)
