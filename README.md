@@ -35,7 +35,6 @@ If successful you will see ![Dev Container: apidemo](./imgs/devc.jpg) in the low
 ## 2. Client Project Setup
 in vscode TERMINAL:
 ```sh
-cd /workspaces/apidemo/
 npm install
 ```
 
