@@ -253,7 +253,7 @@ async function Call(name: string, types: any, demoname: string) {
         >source</a
       >) is built using Lockval Engine itself
     </p>
-    <p>This site is still under construction</p>
+
     <br /><br /><br />
 
     <hr />
