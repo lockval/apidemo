@@ -220,7 +220,10 @@ async function Call(name: string, types: any, demoname: string) {
 
   <main>
     <p>
-      <span>welcome to <a href="https://lockval.com" target="_blank">Lockval Engine</a></span>
+      <span
+        >Welcome to
+        <a href="https://lockval.com" target="_blank">Lockval Engine</a></span
+      >
       <!-- <span style="font-size: 40px" class="blue">loc</span>
       <span style="font-size: 40px" class="red">K</span>
       <span style="font-size: 40px" class="green">V</span>

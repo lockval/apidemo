@@ -9,8 +9,7 @@ import (
 
 func (e export) Export_testG(input *go2plugin.Input) map[string]any {
 
-	// TODO conv to struct and get func Sum
-	Sum := helper.Any2Func[func(string, string) string](globalThis.G, "Sum")
+	Sum := helper.Any2Func[func(string, string) string](globalThis.G["lockval"], "Sum")
 	c := Sum("a", "b")
-	return map[string]any{"c": c}
+	return map[string]any{"c": c, "lang": "Go"}
 }

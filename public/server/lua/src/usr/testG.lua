@@ -5,9 +5,10 @@ return require("umd").define({
     function exports.main(input)
 
 
-        local c = _G.G.Sum("a","b")
+        local c = _G.G["lockval"].Sum("a","b")
         local resp={}
         resp["c"]=c
+        resp["lang"]="Lua"
         return resp
     end
 

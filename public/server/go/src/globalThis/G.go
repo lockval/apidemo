@@ -1,3 +1,3 @@
 package globalThis
 
-var G any
+var G map[string]any
