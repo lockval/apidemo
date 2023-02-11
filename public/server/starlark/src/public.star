@@ -1,5 +1,5 @@
 
-def main():
+def main(input):
     # According to the prefix of the id, the corresponding key is publicized, 
     # and the unpublished key will not be synchronized to the client
     return {

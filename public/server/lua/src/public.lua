@@ -2,7 +2,7 @@ return require("umd").define({
     "exports",
 }, function(exports)
 
-    function exports.main()
+    function exports.main(input)
         -- According to the prefix of the id, the corresponding key is publicized, 
         -- and the unpublished key will not be synchronized to the client
         local retval = {}

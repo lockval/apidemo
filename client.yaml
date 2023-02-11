@@ -1,8 +1,8 @@
-- name: request, response and JSONFILE
+- name: request, response and Json
   comment: |
-    This example will show you how to read user input and JSONFILE file and return them to the client
-    keywords: **input.Requ, JSONFILE**
-    The JSONFILE file is main.json, you can display it directly on the button above
+    This example will show you how to read user input and Json file and return them to the client
+    keywords: **input.Requ, input.Json**
+    The Json file is main.json, you can display it directly on the button above
     When you execute:
       - npm run serverJsBuildAndUpload
       - npm run serverLuaBuildAndUpload
@@ -10,7 +10,7 @@
       - npm run serverGoBuildAndUpload
     
     The above script will first upload main.json and then upload the server script
-    **Please note**: If you want the JSONFILE file to take effect, you must change the server script.
+    **Please note**: If you want the Json file to take effect, you must change the server script.
   KeySubList: []
   Call: 
       name: testRequResp

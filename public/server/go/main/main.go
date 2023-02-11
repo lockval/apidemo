@@ -20,7 +20,8 @@ var (
 
 func init() {
 
-	Export["init"] = initFunc
+	Export["public"] = publicFunc
+	Export["json"] = jsonFunc
 	Export["login"] = loginFunc
 	Export["watch"] = watchFunc
 
@@ -33,9 +34,7 @@ func init() {
 
 }
 
-func initFunc(*go2plugin.Input) map[string]any {
-
-	globalThis.JSONFILE = Import["JSONFILE"]
+func publicFunc(input *go2plugin.Input) map[string]any {
 
 	globalThis.Builtin.MakeKSUID = helper.Any2Func[func() string](Import["Builtin"], "MakeKSUID")
 	globalThis.Builtin.MapKeys = helper.Any2Func[func(m any, f func(k any))](Import["Builtin"], "MapKeys")
@@ -44,8 +43,13 @@ func initFunc(*go2plugin.Input) map[string]any {
 
 	globalThis.G = helper.Any2type[map[string]any](Import["G"])
 
-	return src.Init()
+	return src.Public(input)
 }
+
+func jsonFunc(input *go2plugin.Input) map[string]any {
+	return src.Json(input)
+}
+
 func loginFunc(input *go2plugin.Input) map[string]any {
 	src.Login(input)
 	return nil

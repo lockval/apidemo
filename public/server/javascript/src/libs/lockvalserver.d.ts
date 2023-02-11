@@ -74,6 +74,8 @@ export declare class DBOperate<T> {
   WATCHUID: string; // This is the observer's ID(watch)
   Requ: T; // User Request Parameters(call)
 
+  Json: any; // Json object
+
   // GetAndLock data returns here
   GetResp: GetAndLockResp;
 
