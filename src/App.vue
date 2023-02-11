@@ -220,10 +220,10 @@ async function Call(name: string, types: any, demoname: string) {
 
   <main>
     <p>
-      <span
-        >Welcome to
-        <a href="https://lockval.com" target="_blank">Lockval Engine</a></span
-      >
+      <span>
+        <a href="https://lockval.com" target="_blank">Lockval Engine</a>
+        is free backend engine
+      </span>
       <!-- <span style="font-size: 40px" class="blue">loc</span>
       <span style="font-size: 40px" class="red">K</span>
       <span style="font-size: 40px" class="green">V</span>
@@ -252,9 +252,8 @@ async function Call(name: string, types: any, demoname: string) {
     <br />
     <p>You can learn how to build your app with Lockval Engine here.</p>
     <p>
-      This site(<a href="https://github.com/lockval/apidemo" target="_blank"
-        >source</a
-      >) is built using Lockval Engine itself
+      This site(<a href="https://github.com/lockval/apidemo" target="_blank">source</a>) is built using Lockval Engine
+      itself
     </p>
 
     <br /><br /><br />
@@ -270,14 +269,11 @@ async function Call(name: string, types: any, demoname: string) {
     guestname =
     <input @input="input" v-model="$store.state.config.guestname" /> // refresh
     takes effect<br />
-    <highlightjs
-      language="typescript"
-      code='import { Player } from "./player";
+    <highlightjs language="typescript" code='import { Player } from "./player";
 let player = new Player();
 player.guestname = guestname;
 player.Open(null);
-    '
-    />
+    ' />
     <br />
     In player.ts you can check your UID<br />
     <highlightjs language="typescript" code="console.log(this.userData.UID);" />
@@ -339,28 +335,13 @@ player.Open(null);
               </tr>
               <tr>
                 <td>
-                  <textarea
-                    readonly
-                    rows="10"
-                    cols="54"
-                    :value="GetoldV(KeySub)"
-                  ></textarea>
+                  <textarea readonly rows="10" cols="54" :value="GetoldV(KeySub)"></textarea>
                 </td>
                 <td>
-                  <textarea
-                    readonly
-                    rows="10"
-                    cols="54"
-                    :value="GetchgV(KeySub)"
-                  ></textarea>
+                  <textarea readonly rows="10" cols="54" :value="GetchgV(KeySub)"></textarea>
                 </td>
                 <td>
-                  <textarea
-                    readonly
-                    rows="10"
-                    cols="54"
-                    :value="GetnewV(KeySub)"
-                  ></textarea>
+                  <textarea readonly rows="10" cols="54" :value="GetnewV(KeySub)"></textarea>
                 </td>
               </tr>
             </table>
@@ -383,19 +364,15 @@ player.Open(null);
           </button>
 
           <div v-for="id in demo.IDs" :key="id">
-            <button
-              :disabled="$store.state.IsInWatch(demo.StructName.name, id)"
-              @click="Watch(demo.StructName.name, id)"
-            >
+            <button :disabled="$store.state.IsInWatch(demo.StructName.name, id)"
+              @click="Watch(demo.StructName.name, id)">
               player.Watch("{{ demo.StructName.name }}:{{ id }}",{{
                 demo.StructName.name
               }}Data);
             </button>
             •
-            <button
-              :disabled="$store.state.IsNoWatch(demo.StructName.name, id)"
-              @click="WatchClose(demo.StructName.name, id)"
-            >
+            <button :disabled="$store.state.IsNoWatch(demo.StructName.name, id)"
+              @click="WatchClose(demo.StructName.name, id)">
               player.WatchClose("{{ demo.StructName.name }}:{{ id }}");
             </button>
           </div>
@@ -423,28 +400,13 @@ player.Open(null);
               </tr>
               <tr>
                 <td>
-                  <textarea
-                    readonly
-                    rows="10"
-                    cols="54"
-                    :value="GetoldV(KeySub)"
-                  ></textarea>
+                  <textarea readonly rows="10" cols="54" :value="GetoldV(KeySub)"></textarea>
                 </td>
                 <td>
-                  <textarea
-                    readonly
-                    rows="10"
-                    cols="54"
-                    :value="GetchgV(KeySub)"
-                  ></textarea>
+                  <textarea readonly rows="10" cols="54" :value="GetchgV(KeySub)"></textarea>
                 </td>
                 <td>
-                  <textarea
-                    readonly
-                    rows="10"
-                    cols="54"
-                    :value="GetnewV(KeySub)"
-                  ></textarea>
+                  <textarea readonly rows="10" cols="54" :value="GetnewV(KeySub)"></textarea>
                 </td>
               </tr>
             </table>
