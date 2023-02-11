@@ -143,7 +143,7 @@
 
     - In the server script:
       1. Write the "watch" file. According to your own needs, judge whether this call can be allowed
-      2. Write the "init" file. Let lockval know which fields can be synchronized to the client
+      2. Write the "public" file. Let lockval know which fields can be synchronized to the client
 
     After the above preparations, you can execute player.Watch to watch a public UID. You can see the data change in the example below
   StructName: 

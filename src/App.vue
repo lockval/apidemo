@@ -368,15 +368,15 @@ player.Open(null);
         </template>
         <template v-else-if="demo.StructName">
           <button @click="jswatch('watch', demo.name)">JS(watch)</button> •
-          <button @click="jswatch('init', demo.name)">JS(init)</button> •
+          <button @click="jswatch('public', demo.name)">JS(public)</button> •
           <button @click="gowatch('watch', demo.name)">Go(watch)</button> •
-          <button @click="gowatch('init', demo.name)">Go(init)</button> •
+          <button @click="gowatch('public', demo.name)">Go(public)</button> •
           <button @click="luawatch('watch', demo.name)">Lua(watch)</button> •
-          <button @click="luawatch('init', demo.name)">Lua(init)</button> •
+          <button @click="luawatch('public', demo.name)">Lua(public)</button> •
           <button @click="starwatch('watch', demo.name)">
             Starlark(watch)
           </button>
-          <button @click="starwatch('init', demo.name)">Starlark(init)</button>
+          <button @click="starwatch('public', demo.name)">Starlark(public)</button>
           ---
           <button @click="structCode(demo.StructName.name, demo.name)">
             show CLIENT code
