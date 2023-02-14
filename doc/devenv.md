@@ -1,14 +1,14 @@
 # Self-built linux development environment(Not recommended)
 
 ## 0. Prepare a linux system
-lockval only supports running in a Linux environment, so you need to prepare a Linux operating environment. Then continue the following steps in the Linux environment
+lockval only supports running in a Linux 64bit(arm/amd) environment, so you need to prepare a Linux operating environment. Then continue the following steps in the Linux environment
 
 ## 1. prepare some tools
 - Git
 - Node.js
 - curl
 - unzip
-- Go (1.19)
+- Go (1.19.4)
 - Lua (>=5.1)
 - [starc2one](https://github.com/lockval/starc2one#INSTALLATION)
 
