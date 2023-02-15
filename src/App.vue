@@ -252,8 +252,9 @@ async function Call(name: string, types: any, demoname: string) {
     <br />
     <p>You can learn how to build your app with Lockval Engine here.</p>
     <p>
-      This site(<a href="https://github.com/lockval/apidemo" target="_blank">source</a>) is built using Lockval Engine
-      itself
+      This site(<a href="https://github.com/lockval/apidemo" target="_blank"
+        >source</a
+      >) is built using Lockval Engine itself
     </p>
 
     <br /><br /><br />
@@ -269,11 +270,14 @@ async function Call(name: string, types: any, demoname: string) {
     guestname =
     <input @input="input" v-model="$store.state.config.guestname" /> // refresh
     takes effect<br />
-    <highlightjs language="typescript" code='import { Player } from "./player";
+    <highlightjs
+      language="typescript"
+      code='import { Player } from "./player";
 let player = new Player();
 player.guestname = guestname;
 player.Open(null);
-    ' />
+    '
+    />
     <br />
     In player.ts you can check your UID<br />
     <highlightjs language="typescript" code="console.log(this.userData.UID);" />
@@ -284,50 +288,57 @@ player.Open(null);
     ▼ main.json (config)
     <highlightjs language="json" :code="$store.state.config.jsonCode" />
 
-    <br/>
-    <br/>
+    <br />
+    <br />
     <hr />
 
-    ▼ Server Basic Code<br/>
-    
-    When loading a new server-side script, this json code is called first. You can preprocess json data here and return new json data<br>
+    ▼ Server Basic Code<br />
+
+    When loading a new server-side script, this json code is called first. You
+    can preprocess json data here and return new json data<br />
     <button @click="jswatch('json', '')">JS(json)</button> •
     <button @click="gowatch('json', '')">Go(json)</button> •
     <button @click="luawatch('json', '')">Lua(json)</button> •
     <button @click="starwatch('json', '')">Starlark(json)</button>
-    <br/><br/>
-    
-    After calling the json code, the public code will be executed. Here you can set which prefix UIDs expose which fields.<br/>
+    <br /><br />
+
+    After calling the json code, the public code will be executed. Here you can
+    set which prefix UIDs expose which fields.<br />
     <button @click="jswatch('public', '')">JS(public)</button> •
     <button @click="gowatch('public', '')">Go(public)</button> •
     <button @click="luawatch('public', '')">Lua(public)</button> •
     <button @click="starwatch('public', '')">Starlark(public)</button>
-    <br/><br/>
+    <br /><br />
 
-    Run this code when user logs in.<br/>
+    Run this code when user logs in.<br />
     <button @click="jswatch('login', '')">JS(login)</button> •
     <button @click="gowatch('login', '')">Go(login)</button> •
     <button @click="luawatch('login', '')">Lua(login)</button> •
     <button @click="starwatch('login', '')">Starlark(login)</button>
-    <br/><br/>
+    <br /><br />
 
-    When the front end executes the 'Watch' command, this code will be executed, and the returned Boolean value determines whether the 'Watch' command is allowed<br/>
+    When the front end executes the 'Watch' command, this code will be executed,
+    and the returned Boolean value determines whether the 'Watch' command is
+    allowed<br />
     <button @click="jswatch('watch', '')">JS(watch)</button> •
     <button @click="gowatch('watch', '')">Go(watch)</button> •
     <button @click="luawatch('watch', '')">Lua(watch)</button> •
     <button @click="starwatch('watch', '')">Starlark(watch)</button>
-    <br/><br/>
+    <br /><br />
 
-
-    <div>{{ $store.state.getTitle('') }}</div>
+    <div>{{ $store.state.getTitle("") }}</div>
     <highlightjs autodetect :code="$store.state.getHL('')" />
 
-    <br/>
-    <br/>
+    <br />
+    <br />
     <hr />
-    <br/>
-    <br/>
-    <div style="color:#F00">▼ The following uses several examples to explain the functions and usage of each API, click to expand to view</div><br/>
+    <br />
+    <br />
+    <div style="color: #f00">
+      ▼ The following uses several examples to explain the functions and usage
+      of each API, click to expand to view
+    </div>
+    <br />
 
     <br /><br /><br />
 
@@ -378,34 +389,52 @@ player.Open(null);
               </tr>
               <tr>
                 <td>
-                  <textarea readonly rows="10" cols="54" :value="GetoldV(KeySub)"></textarea>
+                  <textarea
+                    readonly
+                    rows="10"
+                    cols="54"
+                    :value="GetoldV(KeySub)"
+                  ></textarea>
                 </td>
                 <td>
-                  <textarea readonly rows="10" cols="54" :value="GetchgV(KeySub)"></textarea>
+                  <textarea
+                    readonly
+                    rows="10"
+                    cols="54"
+                    :value="GetchgV(KeySub)"
+                  ></textarea>
                 </td>
                 <td>
-                  <textarea readonly rows="10" cols="54" :value="GetnewV(KeySub)"></textarea>
+                  <textarea
+                    readonly
+                    rows="10"
+                    cols="54"
+                    :value="GetnewV(KeySub)"
+                  ></textarea>
                 </td>
               </tr>
             </table>
           </div>
         </template>
         <template v-else-if="demo.StructName">
-
           <button @click="structCode(demo.StructName.name, demo.name)">
             show CLIENT code
           </button>
 
           <div v-for="id in demo.IDs" :key="id">
-            <button :disabled="$store.state.IsInWatch(demo.StructName.name, id)"
-              @click="Watch(demo.StructName.name, id)">
+            <button
+              :disabled="$store.state.IsInWatch(demo.StructName.name, id)"
+              @click="Watch(demo.StructName.name, id)"
+            >
               player.Watch("{{ demo.StructName.name }}:{{ id }}",{{
                 demo.StructName.name
               }}Data);
             </button>
             •
-            <button :disabled="$store.state.IsNoWatch(demo.StructName.name, id)"
-              @click="WatchClose(demo.StructName.name, id)">
+            <button
+              :disabled="$store.state.IsNoWatch(demo.StructName.name, id)"
+              @click="WatchClose(demo.StructName.name, id)"
+            >
               player.WatchClose("{{ demo.StructName.name }}:{{ id }}");
             </button>
           </div>
@@ -433,13 +462,28 @@ player.Open(null);
               </tr>
               <tr>
                 <td>
-                  <textarea readonly rows="10" cols="54" :value="GetoldV(KeySub)"></textarea>
+                  <textarea
+                    readonly
+                    rows="10"
+                    cols="54"
+                    :value="GetoldV(KeySub)"
+                  ></textarea>
                 </td>
                 <td>
-                  <textarea readonly rows="10" cols="54" :value="GetchgV(KeySub)"></textarea>
+                  <textarea
+                    readonly
+                    rows="10"
+                    cols="54"
+                    :value="GetchgV(KeySub)"
+                  ></textarea>
                 </td>
                 <td>
-                  <textarea readonly rows="10" cols="54" :value="GetnewV(KeySub)"></textarea>
+                  <textarea
+                    readonly
+                    rows="10"
+                    cols="54"
+                    :value="GetnewV(KeySub)"
+                  ></textarea>
                 </td>
               </tr>
             </table>
@@ -449,5 +493,23 @@ player.Open(null);
       </details>
       <br /><br /><br />
     </div>
+
+    <br />
+    <br />
+    <hr />
+    <br />
+    <br />
+    <div style="color: #f00">
+      ▼ Below is a demo of the "trigger" service.<br />
+
+You can only test it in your own local environment.<br />
+
+'trigger' can initiate the execution of script functions via http. In this way, a function similar to recharge callback can be realized<br />
+
+Copy the code to the console for execution, and find that the value of Count has changed.
+    </div>
+    <br />
+    fetch("http://127.0.0.1:59102/call?chk=3333&uid={{ $store.state.config.UID }}&cmd=sys/testItsTime",{method: 'POST',body:JSON.stringify({n:1})})
+
   </main>
 </template>
