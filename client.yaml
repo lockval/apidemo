@@ -141,7 +141,7 @@
     - In the client
       1. we need to define which keys this structure contains. These codes are somewhat similar to player.ts.
 
-    - In the server script:
+    - In the server script(Check out the code in "Server Basic Code" above):
       1. Write the "watch" file. According to your own needs, judge whether this call can be allowed
       2. Write the "public" file. Let lockval know which fields can be synchronized to the client
 

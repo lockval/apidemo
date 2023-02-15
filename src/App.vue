@@ -259,7 +259,7 @@ async function Call(name: string, types: any, demoname: string) {
     <br /><br /><br />
 
     <hr />
-    ▼ client code
+    ▼ Client Code
     <br />
     <br />
     <button @click="clientCode()">show / hide player.ts</button><br />
@@ -281,10 +281,52 @@ player.Open(null);
     <br /><br /><br />
 
     <hr />
-    <details>
-      <summary>main.json (config)</summary>
-      <highlightjs language="json" :code="$store.state.config.jsonCode" />
-    </details>
+    ▼ main.json (config)
+    <highlightjs language="json" :code="$store.state.config.jsonCode" />
+
+    <hr />
+    <br/>
+    <br/>
+    ▼ Server Basic Code<br/>
+    
+    When loading a new server-side script, this json code is called first. You can preprocess json data here and return new json data<br>
+    <button @click="jswatch('json', '')">JS(json)</button> •
+    <button @click="gowatch('json', '')">Go(json)</button> •
+    <button @click="luawatch('json', '')">Lua(json)</button> •
+    <button @click="starwatch('json', '')">Starlark(json)</button>
+    <br/><br/>
+    
+    After calling the json code, the public code will be executed. Here you can set which prefix UIDs expose which fields.<br/>
+    <button @click="jswatch('public', '')">JS(public)</button> •
+    <button @click="gowatch('public', '')">Go(public)</button> •
+    <button @click="luawatch('public', '')">Lua(public)</button> •
+    <button @click="starwatch('public', '')">Starlark(public)</button>
+    <br/><br/>
+
+    Run this code when user logs in.<br/>
+    <button @click="jswatch('login', '')">JS(login)</button> •
+    <button @click="gowatch('login', '')">Go(login)</button> •
+    <button @click="luawatch('login', '')">Lua(login)</button> •
+    <button @click="starwatch('login', '')">Starlark(login)</button>
+    <br/><br/>
+
+    When the front end executes the 'Watch' command, this code will be executed, and the returned Boolean value determines whether the 'Watch' command is allowed<br/>
+    <button @click="jswatch('watch', '')">JS(watch)</button> •
+    <button @click="gowatch('watch', '')">Go(watch)</button> •
+    <button @click="luawatch('watch', '')">Lua(watch)</button> •
+    <button @click="starwatch('watch', '')">Starlark(watch)</button>
+    <br/><br/>
+
+
+    <div>{{ $store.state.getTitle('') }}</div>
+    <highlightjs autodetect :code="$store.state.getHL('')" />
+
+    <br/>
+    <br/>
+    <hr />
+    <br/>
+    <br/>
+    <div style="color:#F00">▼ The following uses several examples to explain the functions and usage of each API, click to expand to view</div><br/>
 
     <br /><br /><br />
 
@@ -348,17 +390,7 @@ player.Open(null);
           </div>
         </template>
         <template v-else-if="demo.StructName">
-          <button @click="jswatch('watch', demo.name)">JS(watch)</button> •
-          <button @click="jswatch('public', demo.name)">JS(public)</button> •
-          <button @click="gowatch('watch', demo.name)">Go(watch)</button> •
-          <button @click="gowatch('public', demo.name)">Go(public)</button> •
-          <button @click="luawatch('watch', demo.name)">Lua(watch)</button> •
-          <button @click="luawatch('public', demo.name)">Lua(public)</button> •
-          <button @click="starwatch('watch', demo.name)">
-            Starlark(watch)
-          </button>
-          <button @click="starwatch('public', demo.name)">Starlark(public)</button>
-          ---
+
           <button @click="structCode(demo.StructName.name, demo.name)">
             show CLIENT code
           </button>
