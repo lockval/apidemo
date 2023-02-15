@@ -284,9 +284,10 @@ player.Open(null);
     ▼ main.json (config)
     <highlightjs language="json" :code="$store.state.config.jsonCode" />
 
+    <br/>
+    <br/>
     <hr />
-    <br/>
-    <br/>
+
     ▼ Server Basic Code<br/>
     
     When loading a new server-side script, this json code is called first. You can preprocess json data here and return new json data<br>
