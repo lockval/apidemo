@@ -502,14 +502,17 @@ player.Open(null);
     <div style="color: #f00">
       ▼ Below is a demo of the "trigger" service.<br />
 
-You can only test it in your own local environment.<br />
+      You can only test it in your own local environment.<br />
 
-'trigger' can initiate the execution of script functions via http. In this way, a function similar to recharge callback can be realized<br />
+      'trigger' can initiate the execution of script functions via http. In this
+      way, a function similar to recharge callback can be realized<br />
 
-Copy the code to the console for execution, and find that the value of Count has changed.
+      Copy the code to the console for execution, and find that the value of
+      Count has changed.
     </div>
     <br />
-    fetch("http://127.0.0.1:59102/call?chk=3333&uid={{ $store.state.config.UID }}&cmd=sys/testItsTime",{method: 'POST',body:JSON.stringify({n:1})})
-
+    fetch("http://127.0.0.1:59102/call?chk=3333&uid={{
+      $store.state.config.UID
+    }}&cmd=sys/testItsTime",{method: 'POST',body:JSON.stringify({n:1})})
   </main>
 </template>

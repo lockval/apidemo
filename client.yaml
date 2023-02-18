@@ -153,11 +153,18 @@
 
 
 
-- name: send A message to globalChat
+- name: send A message to globalChat and trigger cron
   comment: |
     Please click Watch in the example above before Call
 
     Add data to globalChat:the001. This way users watching globalChat:the001 will see the changes
+
+    The cron functionality for triggers is also demonstrated here. For configuration, see the config.yaml of the server.
+
+    It demonstrates the action of two bots sending messages periodically.
+
+    about cron, you can see: https://lockval.com/docs/architecture/trigger/
+
   KeySubList:
     - name: mChatList
       comment: chat history here
