@@ -563,6 +563,9 @@ export abstract class paclient extends Base {
 
       default:
         {
+          if (ev.data.length === 0) {
+            return
+          }
           const UpdateData = JSON.parse(ev.data);
           if (!("ID" in UpdateData)) {
             const resolve = this.resolves.shift();
