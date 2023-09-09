@@ -222,7 +222,7 @@ async function Call(name: string, types: any, demoname: string) {
     <p>
       <span>
         <a href="https://lockval.com" target="_blank">Lockval Engine</a>
-        is free backend engine
+        is free Game backend engine
       </span>
       <!-- <span style="font-size: 40px" class="blue">loc</span>
       <span style="font-size: 40px" class="red">K</span>
