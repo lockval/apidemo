@@ -1,4 +1,8 @@
 {
-    "name": "apidemo",
-    "dockerFile": "Dockerfile"
+  "name": "apidemo",
+  "dockerFile": "Dockerfile",
+  "forwardPorts": [
+    59501,
+    59502
+  ]
 }

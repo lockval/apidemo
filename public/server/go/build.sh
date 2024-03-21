@@ -2,7 +2,7 @@
 
 # This script can help you compile go server script
 
-if [[ $(go env GOVERSION) != go1.19.4 ]]; then
+if [[ $(go env GOVERSION) != go1.21.8 ]]; then
     echo fail
     exit 1
 fi

@@ -8,7 +8,7 @@ lockval only supports running in a Linux 64bit(arm/amd) environment, so you need
 - Node.js
 - curl
 - unzip
-- Go (1.19.4)
+- Go (1.21.8)
 - Lua (>=5.1)
 - [starc2one](https://github.com/lockval/starc2one#INSTALLATION)
 
