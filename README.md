@@ -17,9 +17,9 @@ npm run buildBothAndPreview
 ##  Click here to open the development environment
 [![Open in Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?repo=lockval/apidemo)
 
-or you can try:
+or run locally:
 
-[Build a local vscode Dev Container environment(not recommended)](https://github.com/lockval/apidemo/blob/main/doc/container.md)
+[Build a vscode Dev Container environment (not recommended)](https://github.com/lockval/apidemo/blob/main/doc/container.md)
 
 [Build a Linux development environment (not recommended)](https://github.com/lockval/apidemo/blob/main/doc/devenv.md)
 
