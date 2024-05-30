@@ -12,18 +12,10 @@ lockval only supports running in a Linux 64bit(arm/amd) environment, so you need
 - Lua (>=5.1)
 - [starc2one](https://github.com/lockval/starc2one#INSTALLATION)
 
-## 2. Client Project Setup
-
-Clone this project code, and execute the following code in the project directory.
 
 
 
-```sh
-npm install
-```
-
-
-## 3. Download and start your server (Execute start.sh)
+## 2. Download and start your server (Execute start.sh)
 
 - [amd64(X86)](https://downloads.lockval.com/latest.amd64.linux.zip)
 - [arm64(AArch64)](https://downloads.lockval.com/latest.arm64.linux.zip)
