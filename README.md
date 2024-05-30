@@ -14,19 +14,12 @@ npm run buildBothAndPreview
 ```
 -->
 
-## Use [Dev Container](https://code.visualstudio.com/docs/devcontainers/containers) to open project in vscode
+##  Click here to open the development environment
+[![Open in Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?repo=lockval/apidemo)
 
-You may need these tools:
+or you can try:
 
-- Visual Studio Code
-- Docker Desktop
-
-Follow the steps to open the project:
-  1. Open this project in vscode
-  2. Click ![Open a Remote Window](./imgs/orw.jpg) in the lower left corner
-  3. Click "Reopen in Container"
-
-If successful you will see ![Dev Container: apidemo](./imgs/devc.jpg) in the lower left corner
+[Build a local vscode Dev Container environment(not recommended)](https://github.com/lockval/apidemo/blob/main/doc/container.md)
 
 [Build a Linux development environment (not recommended)](https://github.com/lockval/apidemo/blob/main/doc/devenv.md)
 
