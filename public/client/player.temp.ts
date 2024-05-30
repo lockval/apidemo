@@ -56,9 +56,30 @@ export class Player extends paclient {
   }
 
   protected OnLoginInfo(logindata: any): LoginInfo {
+    let gwaddrs = "//repl4";
+    const hostname = window.location.hostname;
+    const vscodedev = ".vscode.dev";
+
+    if (hostname.endsWith(vscodedev)) {
+      const prefix = hostname.slice(0, -vscodedev.length);
+      gwaddrs =
+        "https://" +
+        prefix +
+        "-59501" +
+        vscodedev +
+        "," +
+        "https://" +
+        prefix +
+        "-59502" +
+        vscodedev;
+    }
+
+    console.log(hostname);
+    console.log(gwaddrs);
+
     const retval: LoginInfo = {
       Bucket: "guest_" + this.guestname,
-      GwAddrs: "//repl4",
+      GwAddrs: gwaddrs,
     };
 
     return retval;
