@@ -8,15 +8,18 @@
   ],
   "portsAttributes": {
     "59501": {
-      "label": "gw-59501",
-      "visibility": "public"
+      "label": "gw-59501"
     },
     "59502": {
-      "label": "gw-59502",
-      "visibility": "public"
+      "label": "gw-59502"
     },
     "4173": {
-      "label": "client"
+      "label": "client",
+      "onAutoForward": "openBrowser"
     }
-  }
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "postCreateCommand":"npm install"
 }

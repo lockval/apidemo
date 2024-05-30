@@ -14,7 +14,7 @@ npm run buildBothAndPreview
 ```
 -->
 
-## 1. Use [Dev Container](https://code.visualstudio.com/docs/devcontainers/containers) to open project in vscode
+## Use [Dev Container](https://code.visualstudio.com/docs/devcontainers/containers) to open project in vscode
 
 You may need these tools:
 
@@ -32,15 +32,7 @@ If successful you will see ![Dev Container: apidemo](./imgs/devc.jpg) in the low
 
 
 
-## 2. Client Project Setup
-in vscode TERMINAL:
-```sh
-npm install
-```
-
-
-
-## 3. Server Start
+## 1. Server Start
 in vscode TERMINAL:
 ```sh
 ./serverStart.sh
@@ -48,7 +40,7 @@ in vscode TERMINAL:
 
 
 
-## 4. Build ServerScript And Upload (Choose a language you want to use)
+## 2. Build ServerScript And Upload (Choose a language you want to use)
 
 - JS
   #### edit public/server/javascript/... and run:
@@ -75,7 +67,7 @@ in vscode TERMINAL:
     ```
 
 
-## 4. Build Client And Preview
+## 3. Build Client And Preview
 in vscode TERMINAL:
 ```sh
 npm run clientBuildAndPreview
