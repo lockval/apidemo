@@ -3,14 +3,20 @@
   "dockerFile": "Dockerfile",
   "forwardPorts": [
     59501,
-    59502
+    59502,
+    4173
   ],
   "portsAttributes": {
     "59501": {
-      "label": "gw59501"
+      "label": "gw-59501",
+      "visibility": "public"
     },
     "59502": {
-      "label": "gw59502"
+      "label": "gw-59502",
+      "visibility": "public"
+    },
+    "4173": {
+      "label": "client"
     }
   }
 }
