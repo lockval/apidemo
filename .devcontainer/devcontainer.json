@@ -4,5 +4,13 @@
   "forwardPorts": [
     59501,
     59502
-  ]
+  ],
+  "portsAttributes": {
+    "59501": {
+      "label": "gw59501"
+    },
+    "59502": {
+      "label": "gw59502"
+    }
+  }
 }
