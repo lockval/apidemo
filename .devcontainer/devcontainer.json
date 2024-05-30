@@ -14,8 +14,7 @@
       "label": "gw-59502"
     },
     "4173": {
-      "label": "client",
-      "onAutoForward": "openBrowser"
+      "label": "client"
     }
   },
   "features": {
