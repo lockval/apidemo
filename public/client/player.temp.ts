@@ -58,20 +58,20 @@ export class Player extends paclient {
   protected OnLoginInfo(logindata: any): LoginInfo {
     let gwaddrs = "//repl4";
     const hostname = window.location.hostname;
-    const vscodedev = ".vscode.dev";
+    const githubdev = ".github.dev";
 
-    if (hostname.endsWith(vscodedev)) {
-      const prefix = hostname.slice(0, -vscodedev.length);
+    if (hostname.endsWith(githubdev)) {
+      const prefix = hostname.slice(0, -githubdev.length);
       gwaddrs =
         "https://" +
         prefix +
         "-59501" +
-        vscodedev +
+        githubdev +
         "," +
         "https://" +
         prefix +
         "-59502" +
-        vscodedev;
+        githubdev;
     }
 
     console.log(hostname);
