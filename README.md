@@ -15,7 +15,7 @@ npm run buildBothAndPreview
 -->
 
 ##  Click here to open the development environment
-[![Open in Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?repo=lockval/apidemo)
+[![Open in Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&repo=lockval/apidemo)
 
 or run locally:
 
