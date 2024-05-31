@@ -61,11 +61,29 @@ in vscode TERMINAL:
 
 
 ## 3. Build Client And Preview
+
 in vscode TERMINAL:
+
+**WARNING, this run mode exposes the code and configuration of your service**
+
+**WARNING, this run mode exposes the code and configuration of your service**
+
+**WARNING, this run mode exposes the code and configuration of your service**
+
 ```sh
-npm run clientBuildAndPreview
+npm run clientPublicSourceCode
 ```
 Click "Open in Browser" to open website
+
+
+**OR**
+
+
+
+If you don't want to expose the service's code and configuration, use this command:
+```sh
+npm run clientPrivate
+```
 
 ## Client Code:
 - public/client/paclient.ts (core code)

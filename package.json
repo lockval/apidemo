@@ -2,21 +2,26 @@
   "name": "apidemo.lockval",
   "version": "1.0.0",
   "scripts": {
-    "build": "run-p serverJsBuildAndUpload clientBuild",
-    "clientBuildAndPreview": "run-s lint clientBuild vitePreview",
+    "build": "run-p serverJsBuildAndUpload clientBuildPublic",
+    "clientPublicSourceCode": "run-s clientBuildPublic vitePreviewPublic",
+    "clientPrivate": "run-s clientBuildPrivate vitePreviewPrivate",
 
-    "dev": "vite",
-    "viteBuild": "vite build",
-    "vitePreview": "vite preview",
-    "type-check": "vue-tsc --noEmit",
+    "clientBuildPublic": "run-s lint YAML2JSON MakePlayer CheckBuildPublic",
+    "clientBuildPrivate": "run-s lint YAML2JSON MakePlayer CheckBuildPrivate",
+
+    "viteBuildPublic": "vite build",
+    "viteBuildPrivate": "vite build --mode private",
+
+    "vitePreviewPublic": "vite preview",
+    "vitePreviewPrivate": "vite preview --mode private",
+    "typeCheck": "vue-tsc --noEmit",
     "lint": "eslint . --ext .vue,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
 
-    "clientCheckBuild": "run-p type-check viteBuild",
-    "clientYAML2JSON": "yaml2json client.yaml > ./src/assets/client.json",
-    "clientMakePlayer": "node ./makeplayer.js",
-    "clientGen": "run-s clientYAML2JSON clientMakePlayer",
-    "clientBuild": "run-s clientGen clientCheckBuild",
+    "CheckBuildPublic": "run-p typeCheck viteBuildPublic",
+    "CheckBuildPrivate": "run-p typeCheck viteBuildPrivate",
 
+    "MakePlayer": "node ./makeplayer.js",
+    "YAML2JSON": "yaml2json client.yaml > ./src/assets/client.json",
 
     "serverUploadJS": "node ./updatefile.js dist/main.js",
     "serverGenJS": "tsc --project ./public/server/javascript/tsconfig.json",
