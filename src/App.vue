@@ -26,8 +26,17 @@ onMounted(() => {
   let guestname = window.localStorage.getItem("guestname");
 
   fetch("./main.json")
-    .then((resp) => resp.text())
-    .then((data) => store.commit("setConfig", { k: "jsonCode", v: data }));
+    .then((resp) => {
+      if (!resp.ok && resp.status === 404) {
+        return "";
+      }
+      return resp.text();
+    })
+    .then((data) => store.commit("setConfig", { k: "jsonCode", v: data }))
+    .catch((error) => {
+      console.error("Fetch error:", error);
+      store.commit("setConfig", { k: "jsonCode", v: "" });
+    });
 
   if (!guestname) {
     guestname = makeid(16);
@@ -82,8 +91,17 @@ function toBoolean(v: any): boolean {
 function clientCode() {
   if (!store.state.config.clientCode) {
     fetch("./client/player.ts")
-      .then((resp) => resp.text())
-      .then((data) => store.commit("setConfig", { k: "clientCode", v: data }));
+      .then((resp) => {
+        if (!resp.ok && resp.status === 404) {
+          return "";
+        }
+        return resp.text();
+      })
+      .then((data) => store.commit("setConfig", { k: "clientCode", v: data }))
+      .catch((error) => {
+        console.error("Fetch error:", error);
+        store.commit("setConfig", { k: "clientCode", v: "" });
+      });
   } else {
     store.commit("setConfig", { k: "clientCode", v: "" });
   }
@@ -110,9 +128,19 @@ function WatchClose(StructName: string, id: string) {
 
 function updateCodeTitle(demoname: string, path: string) {
   fetch(path)
-    .then((resp) => resp.text())
+    .then((resp) => {
+      if (!resp.ok && resp.status === 404) {
+        return "";
+      }
+      return resp.text();
+    })
     .then((data) => {
       store.commit("setCode", { k: demoname, v: data });
+      store.commit("setTitle", { k: demoname, v: path });
+    })
+    .catch((error) => {
+      console.error("Fetch error:", error);
+      store.commit("setCode", { k: demoname, v: "" });
       store.commit("setTitle", { k: demoname, v: path });
     });
 }
