@@ -14,3 +14,4 @@ ENV verifySecretkey=123abc
 # Expose port
 EXPOSE 59501
 EXPOSE 59502
+EXPOSE 59102

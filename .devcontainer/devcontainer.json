@@ -4,6 +4,7 @@
   "forwardPorts": [
     59501,
     59502,
+    59102,
     4173
   ],
   "portsAttributes": {
@@ -12,6 +13,9 @@
     },
     "59502": {
       "label": "gw-59502"
+    },
+    "59102": {
+      "label": "trigger"
     },
     "4173": {
       "label": "client"

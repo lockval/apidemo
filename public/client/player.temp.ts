@@ -76,8 +76,8 @@ export class Player extends paclient {
         appgithubdev;
     }
 
-    console.log(hostname);
-    console.log(gwaddrs);
+    console.log("=hostname=", hostname);
+    console.log("=GwAddrs=", gwaddrs);
 
     const retval: LoginInfo = {
       Bucket: "guest_" + this.guestname,
